@@ -17,7 +17,7 @@ jobs:
           go-version: ">=1.17"
       - name: 変更があるかもしれないしないかもしれない
         run: |
-          BASYX_SWAGGER=https://app.swaggerhub.com/apis/BaSyx/basyx_asset_administration_shell_http_rest_api/v1/swagger.yaml?resolved=true
+          BASYX_SWAGGER=https://api.swaggerhub.com/apis/BaSyx/basyx_asset_administration_shell_http_rest_api/v1/swagger.yaml?resolved=true
           curl $BASYX_SWAGGER > basyx-openapi.yaml
           go install -v github.com/google/gnostic@latest
           go install -v github.com/googleapis/gnostic-grpc@v0.1.0
