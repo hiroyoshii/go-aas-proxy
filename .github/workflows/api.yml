@@ -11,6 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: set up go
+        uses: actions/setup-go@v4
+        with:
+          go-version: ">=1.17"
       - name: 変更があるかもしれないしないかもしれない
         run: |
           BASYX_SWAGGER=https://app.swaggerhub.com/apis/BaSyx/basyx_asset_administration_shell_http_rest_api/v1/swagger.yaml?resolved=true
