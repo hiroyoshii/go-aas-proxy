@@ -1,0 +1,30 @@
+name: API
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Gen API
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: 変更があるかもしれないしないかもしれない
+        run: |
+          BASYX_SWAGGER=https://app.swaggerhub.com/apis/BaSyx/basyx_asset_administration_shell_http_rest_api/v1/swagger.yaml?resolved=true
+          curl $BASYX_SWAGGER > basyx-openapi.yaml
+          go install -v github.com/google/gnostic@latest
+          go install -v github.com/googleapis/gnostic-grpc@v0.1.0
+          gnostic --grpc-out=./proto basyx-openapi.yaml
+
+      - name: commit & push
+        run: |
+          git add -N . # 新規ファイルを含める
+          if ! git diff --exit-code --quiet
+          then
+            git config user.name github-actions
+            git config user.email github-actions@github.com
+            git add .
+            git commit -m "Update"
+            git push
+          fi
