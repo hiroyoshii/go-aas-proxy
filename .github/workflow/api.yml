@@ -2,11 +2,12 @@ name: API
 
 on:
   push:
+    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
   test:
-    name: Gen API
+    name: Gen protobuf
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
