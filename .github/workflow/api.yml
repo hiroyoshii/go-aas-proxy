@@ -1,6 +1,7 @@
 name: API
 
 on:
+  push:
   workflow_dispatch:
 
 jobs:
