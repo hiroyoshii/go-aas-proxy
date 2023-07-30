@@ -1,8 +1,7 @@
-name: API
+name: Basyx Integration
 
 on:
   push:
-    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
@@ -15,13 +14,14 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: ">=1.17"
-      - name: 変更があるかもしれないしないかもしれない
+      - name: retrieve api spec from swaggerhub
         run: |
+          mkdir -p ./generated/source/
           BASYX_SWAGGER=https://api.swaggerhub.com/apis/BaSyx/basyx_asset_administration_shell_http_rest_api/v1/swagger.yaml?resolved=true
-          curl $BASYX_SWAGGER > basyx-openapi.yaml
+          curl $BASYX_SWAGGER > ./generated/source/basyx-openapi.yaml
           go install -v github.com/google/gnostic@latest
           go install -v github.com/googleapis/gnostic-grpc@v0.1.0
-          gnostic --grpc-out=./proto basyx-openapi.yaml
+          gnostic --grpc-out=./generated/proto basyx-openapi.yaml
 
       - name: commit & push
         run: |

@@ -1,0 +1,5 @@
+common:
+  mapping:
+    property: "*_prop"
+    collection: "*_smc"
+    range: "*_range"

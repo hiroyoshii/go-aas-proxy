@@ -1,0 +1,16 @@
+
+CREATE TABLE aas (
+global_id VARCHAR(255) PRIMARY KEY,
+short_id VARCHAR(255) NOT NULL UNIQUE,
+description VARCHAR(255),
+created_at TIMESTAMP NOT NULL,
+updated_at TIMESTAMP NOT NULL,
+FOREIGN KEY (country_id) REFERENCES countries (id) ON DELETE CASCADE
+);
+
+CREATE TABLE submodel (
+global_id_prefix VARCHAR(255) PRIMARY KEY,
+created_at TIMESTAMP NOT NULL,
+updated_at TIMESTAMP NOT NULL,
+FOREIGN KEY (aas_id) REFERENCES aas (global_id) ON DELETE CASCADE
+);

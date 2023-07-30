@@ -1,5 +1,5 @@
 - [ ] architecture + module
-- [ ] from open api to grpc
+- [x] from open api to grpc
 
 - [ ] pipeline
   - [ ] security pipeline, dependa bot
