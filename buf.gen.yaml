@@ -5,10 +5,10 @@ managed:
         default: github.com/hiroyoshii/gen/proto/go
 plugins:
   - plugin: go
-    out: gen/go
+    out: .
     opt: paths=source_relative
   - plugin: go-grpc
-    out: gen/go
+    out: .
     opt:
       - paths=source_relative
       - require_unimplemented_servers=false
