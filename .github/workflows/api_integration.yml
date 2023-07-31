@@ -16,12 +16,12 @@ jobs:
           go-version: ">=1.17"
       - name: retrieve api spec from swaggerhub
         run: |
-          mkdir -p ./generated/source/
+          mkdir -p ./gen/source/
           BASYX_SWAGGER=https://api.swaggerhub.com/apis/BaSyx/basyx_asset_administration_shell_http_rest_api/v1/swagger.yaml?resolved=true
-          curl $BASYX_SWAGGER > ./generated/source/basyx-openapi.yaml
+          curl $BASYX_SWAGGER > ./gen/source/basyx-openapi.yaml
           go install -v github.com/google/gnostic@latest
           go install -v github.com/googleapis/gnostic-grpc@v0.1.0
-          gnostic --grpc-out=./generated/proto basyx-openapi.yaml
+          gnostic --grpc-out=./gen/proto ./gen/source/basyx-openapi.yaml
       - uses: bufbuild/buf-setup-action@v1
         with:
           version: "latest"
