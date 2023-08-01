@@ -3,9 +3,7 @@ syntax = "proto3";
 package basyx_openapi;
 
 import "google/api/annotations.proto";
-
 import "google/protobuf/descriptor.proto";
-
 import "google/protobuf/empty.proto";
 
 message KeyType {
@@ -46,8 +44,7 @@ message LangString {
   string text = 2;
 }
 
-message IEndpointSecurity {
-}
+message IEndpointSecurity {}
 
 message IEndpoint {
   string address = 1;
@@ -147,8 +144,7 @@ message Reference {
   repeated Key keys = 1;
 }
 
-message IDataSpecificationContent {
-}
+message IDataSpecificationContent {}
 
 message IEmbeddedDataSpecification {
   Reference has_data_specification = 1;
@@ -300,8 +296,7 @@ message Message {
   string code = 3;
 }
 
-message Entity {
-}
+message Entity {}
 
 message Result {
   bool success = 1;
@@ -333,8 +328,7 @@ message SubmodelElement {
   repeated LangString description = 8;
 }
 
-message Value {
-}
+message Value {}
 
 message ElementValue {
   Value value = 1;
@@ -516,11 +510,9 @@ message ShellGetSubmodelElementValueByIdShortParameters {
   string se_id_short_path = 2;
 }
 
-message ShellGetSubmodelElementValueByIdShortOK {
-}
+message ShellGetSubmodelElementValueByIdShortOK {}
 
-message ShellPutSubmodelElementValueByIdShortRequestBody {
-}
+message ShellPutSubmodelElementValueByIdShortRequestBody {}
 
 message ShellPutSubmodelElementValueByIdShortParameters {
   string submodel_id_short = 1;
@@ -549,64 +541,66 @@ message ShellGetInvocationResultByIdShortParameters {
 }
 
 service Basyx_openapi {
-  rpc GetAssetAdministrationShell ( google.protobuf.Empty ) returns ( AssetAdministrationShellDescriptor ) {
-    option (google.api.http) = { get:"/aas"  };
+  rpc GetAssetAdministrationShell(google.protobuf.Empty) returns (AssetAdministrationShellDescriptor) {
+    option (google.api.http) = {get: "/aas"};
   }
 
-  rpc GetSubmodelsFromShell ( google.protobuf.Empty ) returns ( Submodel ) {
-    option (google.api.http) = { get:"/aas/submodels"  };
+  rpc GetSubmodelsFromShell(google.protobuf.Empty) returns (Submodel) {
+    option (google.api.http) = {get: "/aas/submodels"};
   }
 
-  rpc GETAasSubmodelsSubmodelIdShort ( GETAasSubmodelsSubmodelIdShortParameters ) returns ( Submodel ) {
-    option (google.api.http) = { get:"/aas/submodels/{submodelIdShort}"  };
+  rpc GETAasSubmodelsSubmodelIdShort(GETAasSubmodelsSubmodelIdShortParameters) returns (Submodel) {
+    option (google.api.http) = {get: "/aas/submodels/{submodelIdShort}"};
   }
 
-  rpc PutSubmodelToShell ( PutSubmodelToShellParameters ) returns ( Submodel ) {
-    option (google.api.http) = { put:"/aas/submodels/{submodelIdShort}" body:"submodel"  };
+  rpc PutSubmodelToShell(PutSubmodelToShellParameters) returns (Submodel) {
+    option (google.api.http) = {
+      put: "/aas/submodels/{submodelIdShort}"
+      body: "submodel"
+    };
   }
 
-  rpc DeleteSubmodelFromShellByIdShort ( DeleteSubmodelFromShellByIdShortParameters ) returns ( Result ) {
-    option (google.api.http) = { delete:"/aas/submodels/{submodelIdShort}"  };
+  rpc DeleteSubmodelFromShellByIdShort(DeleteSubmodelFromShellByIdShortParameters) returns (Result) {
+    option (google.api.http) = {delete: "/aas/submodels/{submodelIdShort}"};
   }
 
-  rpc GetSubmodelFromShellByIdShort ( GetSubmodelFromShellByIdShortParameters ) returns ( Submodel ) {
-    option (google.api.http) = { get:"/aas/submodels/{submodelIdShort}/submodel"  };
+  rpc GetSubmodelFromShellByIdShort(GetSubmodelFromShellByIdShortParameters) returns (Submodel) {
+    option (google.api.http) = {get: "/aas/submodels/{submodelIdShort}/submodel"};
   }
 
-  rpc ShellGetSubmodelValues ( ShellGetSubmodelValuesParameters ) returns ( Result ) {
-    option (google.api.http) = { get:"/aas/submodels/{submodelIdShort}/submodel/values"  };
+  rpc ShellGetSubmodelValues(ShellGetSubmodelValuesParameters) returns (Result) {
+    option (google.api.http) = {get: "/aas/submodels/{submodelIdShort}/submodel/values"};
   }
 
-  rpc ShellGetSubmodelElements ( ShellGetSubmodelElementsParameters ) returns ( SubmodelElement ) {
-    option (google.api.http) = { get:"/aas/submodels/{submodelIdShort}/submodel/submodelElements"  };
+  rpc ShellGetSubmodelElements(ShellGetSubmodelElementsParameters) returns (SubmodelElement) {
+    option (google.api.http) = {get: "/aas/submodels/{submodelIdShort}/submodel/submodelElements"};
   }
 
-  rpc ShellGetSubmodelElementByIdShort ( ShellGetSubmodelElementByIdShortParameters ) returns ( SubmodelElement ) {
-    option (google.api.http) = { get:"/aas/submodels/{submodelIdShort}/submodel/submodelElements/{seIdShortPath}"  };
+  rpc ShellGetSubmodelElementByIdShort(ShellGetSubmodelElementByIdShortParameters) returns (SubmodelElement) {
+    option (google.api.http) = {get: "/aas/submodels/{submodelIdShort}/submodel/submodelElements/{seIdShortPath}"};
   }
 
-  rpc ShellPutSubmodelElement ( ShellPutSubmodelElementParameters ) returns ( SubmodelElement ) {
-    option (google.api.http) = { put:"/aas/submodels/{submodelIdShort}/submodel/submodelElements/{seIdShortPath}"  };
+  rpc ShellPutSubmodelElement(ShellPutSubmodelElementParameters) returns (SubmodelElement) {
+    option (google.api.http) = {put: "/aas/submodels/{submodelIdShort}/submodel/submodelElements/{seIdShortPath}"};
   }
 
-  rpc ShellDeleteSubmodelElementByIdShort ( ShellDeleteSubmodelElementByIdShortParameters ) returns ( Result ) {
-    option (google.api.http) = { delete:"/aas/submodels/{submodelIdShort}/submodel/submodelElements/{seIdShortPath}"  };
+  rpc ShellDeleteSubmodelElementByIdShort(ShellDeleteSubmodelElementByIdShortParameters) returns (Result) {
+    option (google.api.http) = {delete: "/aas/submodels/{submodelIdShort}/submodel/submodelElements/{seIdShortPath}"};
   }
 
-  rpc ShellGetSubmodelElementValueByIdShort ( ShellGetSubmodelElementValueByIdShortParameters ) returns ( ShellGetSubmodelElementValueByIdShortOK ) {
-    option (google.api.http) = { get:"/aas/submodels/{submodelIdShort}/submodel/submodelElements/{seIdShortPath}/value"  };
+  rpc ShellGetSubmodelElementValueByIdShort(ShellGetSubmodelElementValueByIdShortParameters) returns (ShellGetSubmodelElementValueByIdShortOK) {
+    option (google.api.http) = {get: "/aas/submodels/{submodelIdShort}/submodel/submodelElements/{seIdShortPath}/value"};
   }
 
-  rpc ShellPutSubmodelElementValueByIdShort ( ShellPutSubmodelElementValueByIdShortParameters ) returns ( ElementValue ) {
-    option (google.api.http) = { put:"/aas/submodels/{submodelIdShort}/submodel/submodelElements/{seIdShortPath}/value"  };
+  rpc ShellPutSubmodelElementValueByIdShort(ShellPutSubmodelElementValueByIdShortParameters) returns (ElementValue) {
+    option (google.api.http) = {put: "/aas/submodels/{submodelIdShort}/submodel/submodelElements/{seIdShortPath}/value"};
   }
 
-  rpc ShellInvokeOperationByIdShort ( ShellInvokeOperationByIdShortParameters ) returns ( Result ) {
-    option (google.api.http) = { post:"/aas/submodels/{submodelIdShort}/submodel/submodelElements/{idShortPathToOperation}/invoke"  };
+  rpc ShellInvokeOperationByIdShort(ShellInvokeOperationByIdShortParameters) returns (Result) {
+    option (google.api.http) = {post: "/aas/submodels/{submodelIdShort}/submodel/submodelElements/{idShortPathToOperation}/invoke"};
   }
 
-  rpc ShellGetInvocationResultByIdShort ( ShellGetInvocationResultByIdShortParameters ) returns ( InvocationResponse ) {
-    option (google.api.http) = { get:"/aas/submodels/{submodelIdShort}/submodel/submodelElements/{idShortPathToOperation}/invocationList/{requestId}"  };
+  rpc ShellGetInvocationResultByIdShort(ShellGetInvocationResultByIdShortParameters) returns (InvocationResponse) {
+    option (google.api.http) = {get: "/aas/submodels/{submodelIdShort}/submodel/submodelElements/{idShortPathToOperation}/invocationList/{requestId}"};
   }
 }
-

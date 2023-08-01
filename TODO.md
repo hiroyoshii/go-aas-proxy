@@ -4,19 +4,32 @@
 
 # Pipeline
 - [ ] api
-  - [ ] gnostic & push
-  - [ ] buf gen go code
-- [ ] build & testing
-  - [ ] go build & test
-  - [ ] push image
-- [ ] integrated testing
-  - [ ] perf testing by k6.io
-  - [ ] fuzz testing
-- [ ] 
-  - [ ] security pipeline, dependa bot
+  - [x] gnostic & push
+  - [x] buf gen go code
+  - [x] buf lint
+  - [x] buf breaking check
+  - [ ] buf format
+- [ ] build
+  - [ ] go build 
+- [ ] testing
+  - [ ] unit testing
+  - [ ] senario testing
+    - [ ] https://github.com/zoncoen/scenarigo
+    - [ ] perf testing by k6.io
+- [ ] security
+  - [ ] image scan
+  - [ ] fuzzing
+  - [ ] sbom
+- [ ] image
+  - [ ] image push
 - [ ] badge
-  - [ ] security badge
+  - [ ] security badge: https://github.com/ossf/scorecard
 
-# Implementation
-- [ ] modules
+# golang
+- [ ] go1.21: https://tip.golang.org/doc/go1.21
+  - [ ] slog
+- [ ] aas
+  - [ ] aas-core: 
+
+# images
 - [ ] docker compose
