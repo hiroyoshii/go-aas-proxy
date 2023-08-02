@@ -21,7 +21,7 @@ jobs:
           curl $BASYX_SWAGGER > ./gen/source/basyx-openapi.yaml
           go install -v github.com/google/gnostic@latest
           go install -v github.com/googleapis/gnostic-grpc@v0.1.0
-          gnostic --grpc-out=./gen/proto ./gen/source/basyx-openapi.yaml
+          gnostic --grpc-out=./gen/basyx_aas ./gen/source/basyx-openapi.yaml
       - uses: bufbuild/buf-setup-action@v1
         with:
           version: "latest"
