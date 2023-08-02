@@ -17,7 +17,7 @@ jobs:
       - name: retrieve api spec from swaggerhub
         run: |
           mkdir -p ./gen/source/
-          BASYX_SWAGGER=https://api.swaggerhub.com/apis/BaSyx/basyx_asset_administration_shell_http_rest_api/v1/swagger.yaml?resolved=true
+          BASYX_SWAGGER=https://api.swaggerhub.com/apis/BaSyx/basyx_asset_administration_shell_repository_http_rest_api/v1/swagger.yaml?resolved=true
           curl $BASYX_SWAGGER > ./gen/source/basyx-openapi.yaml
           go install -v github.com/google/gnostic@latest
           go install -v github.com/googleapis/gnostic-grpc@v0.1.0
