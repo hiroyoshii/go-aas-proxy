@@ -2,203 +2,134 @@ package server
 
 import (
 	"context"
-	"fmt"
-	basyxpb "hiroyoshii/go-aas-proxy/gen/proto"
-	"log"
-	"net"
+	"net/http"
 
-	"github.com/caarlos0/env"
-	grpcprom "github.com/grpc-ecosystem/go-grpc-middleware/providers/prometheus"
-	grpc_recovery "github.com/grpc-ecosystem/go-grpc-middleware/recovery"
-	"github.com/prometheus/client_golang/prometheus"
-	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
-	"go.opentelemetry.io/otel/trace"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"
-	health "google.golang.org/grpc/health/grpc_health_v1"
-	"google.golang.org/grpc/reflection"
-	"google.golang.org/grpc/status"
-	"google.golang.org/protobuf/types/known/emptypb"
+	basyxAas "hiroyoshii/go-aas-proxy/gen/go"
+
+	"github.com/labstack/echo/v4"
 )
 
-type config struct {
-	Port string `env:"GRPC_PORT" envDefault:":50051"`
+type Server struct{}
+
+// Retrieves all Asset Administration Shells from the Asset Administration Shell repository
+// (GET /shells)
+func (s Server) GetAllAssetAdministrationShells(ctx echo.Context) error {
+	return ctx.JSON(http.StatusOK, &basyxAas.AssetAdministrationShell{})
 }
 
-type server struct {
-	cfg        *config
-	grpcServer *grpc.Server
-	listener   net.Listener
-	isAlive    bool
-	basyxpb.UnimplementedBasyxOpenapiServer
-	basyxpb.UnsafeBasyxOpenapiServer
+// Deletes a specific Asset Administration Shell at the Asset Administration Shell repository
+// (DELETE /shells/{aasId})
+func (s Server) DeleteAssetAdministrationShellById(ctx echo.Context, aasId string) error {
+	return ctx.JSON(http.StatusNotImplemented, nil)
 }
 
-// Server is the interface for API Server
-type Server interface {
-	GetAssetAdministrationShell(context.Context, *emptypb.Empty) (*basyxpb.AssetAdministrationShellDescriptor, error)
-	GetSubmodelsFromShell(context.Context, *emptypb.Empty) (*basyxpb.Submodel, error)
-	GETAasSubmodelsSubmodelIdShort(context.Context, *basyxpb.GETAasSubmodelsSubmodelIdShortParameters) (*basyxpb.Submodel, error)
-	PutSubmodelToShell(context.Context, *basyxpb.PutSubmodelToShellParameters) (*basyxpb.Submodel, error)
-	DeleteSubmodelFromShellByIdShort(context.Context, *basyxpb.DeleteSubmodelFromShellByIdShortParameters) (*basyxpb.Result, error)
-	GetSubmodelFromShellByIdShort(context.Context, *basyxpb.GetSubmodelFromShellByIdShortParameters) (*basyxpb.Submodel, error)
-	ShellGetSubmodelValues(context.Context, *basyxpb.ShellGetSubmodelValuesParameters) (*basyxpb.Result, error)
-	ShellGetSubmodelElements(context.Context, *basyxpb.ShellGetSubmodelElementsParameters) (*basyxpb.SubmodelElement, error)
-	ShellGetSubmodelElementByIdShort(context.Context, *basyxpb.ShellGetSubmodelElementByIdShortParameters) (*basyxpb.SubmodelElement, error)
-	ShellPutSubmodelElement(context.Context, *basyxpb.ShellPutSubmodelElementParameters) (*basyxpb.SubmodelElement, error)
-	ShellDeleteSubmodelElementByIdShort(context.Context, *basyxpb.ShellDeleteSubmodelElementByIdShortParameters) (*basyxpb.Result, error)
-	ShellGetSubmodelElementValueByIdShort(context.Context, *basyxpb.ShellGetSubmodelElementValueByIdShortParameters) (*basyxpb.ShellGetSubmodelElementValueByIdShortOK, error)
-	ShellPutSubmodelElementValueByIdShort(context.Context, *basyxpb.ShellPutSubmodelElementValueByIdShortParameters) (*basyxpb.ElementValue, error)
-	ShellInvokeOperationByIdShort(context.Context, *basyxpb.ShellInvokeOperationByIdShortParameters) (*basyxpb.Result, error)
-	ShellGetInvocationResultByIdShort(context.Context, *basyxpb.ShellGetInvocationResultByIdShortParameters) (*basyxpb.InvocationResponse, error)
-	Serve() error
-	GracefulStop()
-	IsAlive() bool
+// Retrieves a specific Asset Administration Shell from the Asset Administration Shell repository
+// (GET /shells/{aasId})
+func (s Server) GetShellsAasId(ctx echo.Context, aasId string) error {
+	return ctx.JSON(http.StatusOK, &basyxAas.AssetAdministrationShell{})
 }
 
-// healthServer implements health.HealthServer
-type healthServer struct {
+// Creates or updates a Asset Administration Shell at the Asset Administration Shell repository
+// (PUT /shells/{aasId})
+func (s Server) PutAssetAdministrationShell(ctx echo.Context, aasId string) error {
+	return ctx.JSON(http.StatusNotImplemented, nil)
 }
 
-// Check is a function to return health status
-func (h *healthServer) Check(context.Context, *health.HealthCheckRequest) (*health.HealthCheckResponse, error) {
-	return &health.HealthCheckResponse{
-		Status: health.HealthCheckResponse_SERVING,
-	}, nil
+// Retrieves a specific Asset Administration Shell from the Asset Administration Shell repository
+// (GET /shells/{aasId}/aas)
+func (s Server) GetAssetAdministrationShellById(ctx echo.Context, aasId string) error {
+	return ctx.JSON(http.StatusOK, &basyxAas.AssetAdministrationShell{})
 }
 
-// Watch is not used but needs to be implemented
-func (h *healthServer) Watch(*health.HealthCheckRequest, health.Health_WatchServer) error {
-	return status.Error(codes.Unimplemented, "watch is not implemented.")
+// Retrieves all Submodels from the  Asset Administration Shell
+// (GET /shells/{aasId}/aas/submodels)
+func (s Server) ShellRepoGetSubmodelsFromShell(ctx echo.Context, aasId string) error {
+	return ctx.JSON(http.StatusNotImplemented, nil)
 }
 
-// NewServer get the new Server struct
-func NewServer(base context.Context) (Server, error) {
-	cfg := &config{}
-	if err := env.Parse(cfg); err != nil {
-		fmt.Printf("%+v\n", err)
-	}
-
-	lis, err := net.Listen("tcp", cfg.Port)
-	defer log.Printf("Server is listening on port %s\n", cfg.Port)
-	if err != nil {
-		return nil, err
-	}
-
-	// Setup metrics.
-	srvMetrics := grpcprom.NewServerMetrics(
-		grpcprom.WithServerHandlingTimeHistogram(
-			grpcprom.WithHistogramBuckets([]float64{0.001, 0.01, 0.1, 0.3, 0.6, 1, 3, 6, 9, 20, 30, 60, 90, 120}),
-		),
-	)
-
-	reg := prometheus.NewRegistry()
-	reg.MustRegister(srvMetrics)
-	exemplarFromContext := func(ctx context.Context) prometheus.Labels {
-		if span := trace.SpanContextFromContext(ctx); span.IsSampled() {
-			return prometheus.Labels{"traceID": span.TraceID().String()}
-		}
-		return nil
-	}
-
-	s := grpc.NewServer(
-		grpc.ChainUnaryInterceptor(
-			srvMetrics.UnaryServerInterceptor(grpcprom.WithExemplarFromContext(exemplarFromContext)),
-			grpc_recovery.UnaryServerInterceptor(grpc_recovery.WithRecoveryHandler(recoveryFunc)),
-			otelgrpc.UnaryServerInterceptor(),
-		),
-	)
-
-	gs := &server{
-		cfg:        cfg,
-		grpcServer: s,
-		listener:   lis,
-		isAlive:    false,
-	}
-	hs := &healthServer{}
-	health.RegisterHealthServer(s, hs)
-	basyxpb.RegisterBasyxOpenapiServer(s, gs)
-
-	reflection.Register(s)
-	return gs, nil
+// Deletes a specific Submodel from the Asset Administration Shell
+// (DELETE /shells/{aasId}/aas/submodels/{submodelIdShort})
+func (s Server) ShellRepoDeleteSubmodelFromShellByIdShort(ctx echo.Context, aasId string, submodelIdShort string) error {
+	return ctx.JSON(http.StatusNotImplemented, nil)
 }
 
-func recoveryFunc(p interface{}) error {
-	log.Printf("unexpected panic occured: %v\n", p)
-	return status.Errorf(codes.Internal, "Unexpected error")
+// Retrieves the Submodel from the Asset Administration Shell
+// (GET /shells/{aasId}/aas/submodels/{submodelIdShort})
+func (s Server) GetShellsAasIdAasSubmodelsSubmodelIdShort(ctx echo.Context, aasId string, submodelIdShort string) error {
+	return ctx.JSON(http.StatusOK, &basyxAas.Submodel{})
 }
 
-func (s *server) GetAssetAdministrationShell(context.Context, *emptypb.Empty) (*basyxpb.AssetAdministrationShellDescriptor, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetAssetAdministrationShell not implemented")
-}
-func (s *server) GetSubmodelsFromShell(context.Context, *emptypb.Empty) (*basyxpb.Submodel, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetSubmodelsFromShell not implemented")
-}
-func (s *server) GETAasSubmodelsSubmodelIdShort(context.Context, *basyxpb.GETAasSubmodelsSubmodelIdShortParameters) (*basyxpb.Submodel, error) {
-	return nil, status.Error(codes.Unimplemented, "method GETAasSubmodelsSubmodelIdShort not implemented")
-}
-func (s *server) PutSubmodelToShell(context.Context, *basyxpb.PutSubmodelToShellParameters) (*basyxpb.Submodel, error) {
-	return nil, status.Error(codes.Unimplemented, "method PutSubmodelToShell not implemented")
-}
-func (s *server) DeleteSubmodelFromShellByIdShort(context.Context, *basyxpb.DeleteSubmodelFromShellByIdShortParameters) (*basyxpb.Result, error) {
-	return nil, status.Error(codes.Unimplemented, "method DeleteSubmodelFromShellByIdShort not implemented")
-}
-func (s *server) GetSubmodelFromShellByIdShort(context.Context, *basyxpb.GetSubmodelFromShellByIdShortParameters) (*basyxpb.Submodel, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetSubmodelFromShellByIdShort not implemented")
-}
-func (s *server) ShellGetSubmodelValues(context.Context, *basyxpb.ShellGetSubmodelValuesParameters) (*basyxpb.Result, error) {
-	return nil, status.Error(codes.Unimplemented, "method ShellGetSubmodelValues not implemented")
-}
-func (s *server) ShellGetSubmodelElements(context.Context, *basyxpb.ShellGetSubmodelElementsParameters) (*basyxpb.SubmodelElement, error) {
-	return nil, status.Error(codes.Unimplemented, "method ShellGetSubmodelElements not implemented")
-}
-func (s *server) ShellGetSubmodelElementByIdShort(context.Context, *basyxpb.ShellGetSubmodelElementByIdShortParameters) (*basyxpb.SubmodelElement, error) {
-	return nil, status.Error(codes.Unimplemented, "method ShellGetSubmodelElementByIdShort not implemented")
-}
-func (s *server) ShellPutSubmodelElement(context.Context, *basyxpb.ShellPutSubmodelElementParameters) (*basyxpb.SubmodelElement, error) {
-	return nil, status.Error(codes.Unimplemented, "method ShellPutSubmodelElement not implemented")
-}
-func (s *server) ShellDeleteSubmodelElementByIdShort(context.Context, *basyxpb.ShellDeleteSubmodelElementByIdShortParameters) (*basyxpb.Result, error) {
-	return nil, status.Error(codes.Unimplemented, "method ShellDeleteSubmodelElementByIdShort not implemented")
-}
-func (s *server) ShellGetSubmodelElementValueByIdShort(context.Context, *basyxpb.ShellGetSubmodelElementValueByIdShortParameters) (*basyxpb.ShellGetSubmodelElementValueByIdShortOK, error) {
-	return nil, status.Error(codes.Unimplemented, "method ShellGetSubmodelElementValueByIdShort not implemented")
-}
-func (s *server) ShellPutSubmodelElementValueByIdShort(context.Context, *basyxpb.ShellPutSubmodelElementValueByIdShortParameters) (*basyxpb.ElementValue, error) {
-	return nil, status.Error(codes.Unimplemented, "method ShellPutSubmodelElementValueByIdShort not implemented")
-}
-func (s *server) ShellInvokeOperationByIdShort(context.Context, *basyxpb.ShellInvokeOperationByIdShortParameters) (*basyxpb.Result, error) {
-	return nil, status.Error(codes.Unimplemented, "method ShellInvokeOperationByIdShort not implemented")
-}
-func (s *server) ShellGetInvocationResultByIdShort(context.Context, *basyxpb.ShellGetInvocationResultByIdShortParameters) (*basyxpb.InvocationResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ShellGetInvocationResultByIdShort not implemented")
+// Creates or updates a Submodel to an existing Asset Administration Shell
+// (PUT /shells/{aasId}/aas/submodels/{submodelIdShort})
+func (s Server) ShellRepoPutSubmodelToShell(ctx echo.Context, aasId string, submodelIdShort string) error {
+	return ctx.JSON(http.StatusNotImplemented, nil)
 }
 
-// Serve starts API Server
-func (s *server) Serve() error {
-	if s.isAlive {
-		return fmt.Errorf("server is already running")
-	}
-
-	go func() {
-		if err := s.grpcServer.Serve(s.listener); err != nil {
-			log.Printf("failed to serve grpcServer, detail %v\n", err)
-		}
-	}()
-	s.isAlive = true
-
-	return nil
+// Retrieves the Submodel from the Asset Administration Shell
+// (GET /shells/{aasId}/aas/submodels/{submodelIdShort}/submodel)
+func (s Server) ShellRepoGetSubmodelFromShellByIdShort(ctx echo.Context, aasId string, submodelIdShort string) error {
+	return ctx.JSON(http.StatusOK, &basyxAas.Submodel{})
 }
 
-// GracefulStop stops API Server
-func (s *server) GracefulStop() {
-	log.Println("GracefulStop started")
-	defer log.Println("GracefulStop finished")
-
-	s.grpcServer.GracefulStop()
-	s.isAlive = false
+// Retrieves all Submodel-Elements from the Submodel
+// (GET /shells/{aasId}/aas/submodels/{submodelIdShort}/submodel/submodelElements)
+func (s Server) ShellRepoGetSubmodelElements(ctx echo.Context, aasId string, submodelIdShort string) error {
+	return ctx.JSON(http.StatusOK, &basyxAas.SubmodelElement{})
 }
 
-func (s *server) IsAlive() bool {
-	return s.isAlive
+// Retrieves the result of an asynchronously started operation
+// (GET /shells/{aasId}/aas/submodels/{submodelIdShort}/submodel/submodelElements/{idShortPathToOperation}/invocationList/{requestId})
+func (s Server) ShellRepoGetInvocationResultByIdShort(ctx echo.Context, aasId string, submodelIdShort string, idShortPathToOperation string, requestId string) error {
+	return ctx.JSON(http.StatusNotImplemented, nil)
+}
+
+// Invokes a specific operation from the Submodel synchronously or asynchronously
+// (POST /shells/{aasId}/aas/submodels/{submodelIdShort}/submodel/submodelElements/{idShortPathToOperation}/invoke)
+func (s Server) ShellRepoInvokeOperationByIdShort(ctx echo.Context, aasId string, submodelIdShort string, idShortPathToOperation string, params basyxAas.ShellRepoInvokeOperationByIdShortParams) error {
+	return ctx.JSON(http.StatusNotImplemented, nil)
+}
+
+// Deletes a specific Submodel-Element from the Submodel
+// (DELETE /shells/{aasId}/aas/submodels/{submodelIdShort}/submodel/submodelElements/{seIdShortPath})
+func (s Server) ShellRepoDeleteSubmodelElementByIdShort(ctx echo.Context, aasId string, submodelIdShort string, seIdShortPath string) error {
+	return ctx.JSON(http.StatusNotImplemented, nil)
+}
+
+// Retrieves a specific Submodel-Element from the Submodel
+// (GET /shells/{aasId}/aas/submodels/{submodelIdShort}/submodel/submodelElements/{seIdShortPath})
+func (s Server) ShellRepoGetSubmodelElementByIdShort(ctx echo.Context, aasId string, submodelIdShort string, seIdShortPath string) error {
+	return ctx.JSON(http.StatusOK, &basyxAas.SubmodelElement{})
+}
+
+// Creates or updates a Submodel-Element at the Submodel
+// (PUT /shells/{aasId}/aas/submodels/{submodelIdShort}/submodel/submodelElements/{seIdShortPath})
+func (s Server) ShellRepoPutSubmodelElement(ctx echo.Context, aasId string, submodelIdShort string, seIdShortPath string) error {
+	return ctx.JSON(http.StatusNotImplemented, nil)
+}
+
+// Retrieves the value of a specific Submodel-Element from the Submodel
+// (GET /shells/{aasId}/aas/submodels/{submodelIdShort}/submodel/submodelElements/{seIdShortPath}/value)
+func (s Server) ShellRepoGetSubmodelElementValueByIdShort(ctx echo.Context, aasId string, submodelIdShort string, seIdShortPath string) error {
+	return ctx.JSON(http.StatusOK, &basyxAas.SubmodelElement{})
+}
+
+// Updates the Submodel-Element's value
+// (PUT /shells/{aasId}/aas/submodels/{submodelIdShort}/submodel/submodelElements/{seIdShortPath}/value)
+func (s Server) ShellRepoPutSubmodelElementValueByIdShort(ctx echo.Context, aasId string, submodelIdShort string, seIdShortPath string) error {
+	return ctx.JSON(http.StatusNotImplemented, nil)
+}
+
+// Retrieves the minimized version of a Submodel, i.e. only the values of SubmodelElements are serialized and returned
+// (GET /shells/{aasId}/aas/submodels/{submodelIdShort}/submodel/values)
+func (s Server) ShellRepoGetSubmodelValues(ctx echo.Context, aasId string, submodelIdShort string) error {
+	return ctx.JSON(http.StatusOK, &basyxAas.Submodel{})
+}
+
+func NewServer(ctx context.Context) (*echo.Echo, error) {
+	instance := echo.New()
+	server := Server{}
+
+	// 自動生成されたハンドラ登録関数にServerInterfaceを満たすserverを渡す
+	basyxAas.RegisterHandlers(instance, server)
+	return instance, nil
 }

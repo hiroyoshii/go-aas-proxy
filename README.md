@@ -14,7 +14,9 @@ This implementation is inspired from "aas-proxy" in [Representing the Virtual: U
 ![aas-proxy](./assets/aas-proxy.png)
 
 features:
-- gRPC generated from [basyx api](https://app.swaggerhub.com/apis/BaSyx/basyx_asset_administration_shell_http_rest_api/v1) using [gnostic-grpc](https://github.com/google/gnostic-grpc).
+- Open API Endpoints compatible with [Basyx API](https://app.swaggerhub.com/apis/BaSyx/basyx_asset_administration_shell_http_rest_api/v1). But only supports following Endpoints
+  - GET
+    - ⭕ /shells
 - Support multiple RDBMS(Postgres, MySQL, Oracle)
 
 # Architecture

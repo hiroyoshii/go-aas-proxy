@@ -1,0 +1,1678 @@
+---
+openapi: 3.0.1
+info:
+  title: BaSyx Asset Administration Shell Repository HTTP REST-API
+  description: The full description of the generic BaSyx Asset Administration Shell Repository HTTP REST-API
+  contact:
+    name: Constantin Ziesche
+    url: https://www.bosch.com/de/
+    email: constantin.ziesche@bosch.com
+  license:
+    name: EPL-2.0
+    url: https://www.eclipse.org/legal/epl-2.0/
+  version: v1
+servers:
+- url: /
+paths:
+  /shells:
+    get:
+      tags:
+      - AssetAdministrationShellRepository
+      summary: Retrieves all Asset Administration Shells from the Asset Administration Shell repository
+      operationId: GetAllAssetAdministrationShells
+      responses:
+        "200":
+          description: Returns a list of found Asset Administration Shells
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AssetAdministrationShell'
+  /shells/{aasId}:
+    get:
+      tags:
+      - AssetAdministrationShellRepository
+      summary: Retrieves a specific Asset Administration Shell from the Asset Administration Shell repository
+      parameters:
+      - name: aasId
+        in: path
+        description: The Asset Administration Shell's unique id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Asset Administration Shell's unique id
+          nullable: true
+      responses:
+        "200":
+          description: Returns the requested Asset Administration Shell
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetAdministrationShell'
+        "404":
+          description: No Asset Administration Shell found
+    put:
+      tags:
+      - AssetAdministrationShellRepository
+      summary: Creates or updates a Asset Administration Shell at the Asset Administration Shell repository
+      operationId: PutAssetAdministrationShell
+      parameters:
+      - name: aasId
+        in: path
+        description: The Asset Administration Shell's unique id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Asset Administration Shell's unique id
+          nullable: true
+      requestBody:
+        description: The Asset Administration Shell
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssetAdministrationShell'
+      responses:
+        "201":
+          description: Asset Administration Shell created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetAdministrationShell'
+        "400":
+          description: Bad Request
+    delete:
+      tags:
+      - AssetAdministrationShellRepository
+      summary: Deletes a specific Asset Administration Shell at the Asset Administration Shell repository
+      operationId: DeleteAssetAdministrationShellById
+      parameters:
+      - name: aasId
+        in: path
+        description: The Asset Administration Shell's unique id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Asset Administration Shell's unique id
+          nullable: true
+      responses:
+        "200":
+          description: Asset Administration Shell deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+  /shells/{aasId}/aas:
+    get:
+      tags:
+      - AssetAdministrationShellRepository
+      summary: Retrieves a specific Asset Administration Shell from the Asset Administration Shell repository
+      operationId: GetAssetAdministrationShellById
+      parameters:
+      - name: aasId
+        in: path
+        description: The Asset Administration Shell's unique id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Asset Administration Shell's unique id
+          nullable: true
+      responses:
+        "200":
+          description: Returns the requested Asset Administration Shell
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetAdministrationShell'
+        "404":
+          description: No Asset Administration Shell found
+  /shells/{aasId}/aas/submodels:
+    get:
+      tags:
+      - AssetAdministrationShellRepository
+      summary: Retrieves all Submodels from the  Asset Administration Shell
+      operationId: ShellRepo_GetSubmodelsFromShell
+      parameters:
+      - name: aasId
+        in: path
+        description: The Asset Administration Shell's unique id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Asset Administration Shell's unique id
+          nullable: true
+      responses:
+        "200":
+          description: Returns a list of found Submodels
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+        "404":
+          description: No Submodel Service Providers found
+  /shells/{aasId}/aas/submodels/{submodelIdShort}:
+    get:
+      tags:
+      - AssetAdministrationShellRepository
+      summary: Retrieves the Submodel from the Asset Administration Shell
+      parameters:
+      - name: aasId
+        in: path
+        description: The Asset Administration Shell's unique id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Asset Administration Shell's unique id
+          nullable: true
+      - name: submodelIdShort
+        in: path
+        description: The Submodel's short id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Submodel's short id
+          nullable: true
+      responses:
+        "200":
+          description: Submodel retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submodel'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+        "404":
+          description: No Submodel Service Provider found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+    put:
+      tags:
+      - AssetAdministrationShellRepository
+      summary: Creates or updates a Submodel to an existing Asset Administration Shell
+      operationId: ShellRepo_PutSubmodelToShell
+      parameters:
+      - name: aasId
+        in: path
+        description: The Asset Administration Shell's unique id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Asset Administration Shell's unique id
+          nullable: true
+      - name: submodelIdShort
+        in: path
+        description: The Submodel's short id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Submodel's short id
+          nullable: true
+      requestBody:
+        description: The serialized Submodel object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Submodel'
+      responses:
+        "201":
+          description: Submodel created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submodel'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+    delete:
+      tags:
+      - AssetAdministrationShellRepository
+      summary: Deletes a specific Submodel from the Asset Administration Shell
+      operationId: ShellRepo_DeleteSubmodelFromShellByIdShort
+      parameters:
+      - name: aasId
+        in: path
+        description: The Asset Administration Shell's unique id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Asset Administration Shell's unique id
+          nullable: true
+      - name: submodelIdShort
+        in: path
+        description: The Submodel's short id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Submodel's short id
+          nullable: true
+      responses:
+        "204":
+          description: Submodel deleted successfully
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+  /shells/{aasId}/aas/submodels/{submodelIdShort}/submodel:
+    get:
+      tags:
+      - AssetAdministrationShellRepository
+      summary: Retrieves the Submodel from the Asset Administration Shell
+      operationId: ShellRepo_GetSubmodelFromShellByIdShort
+      parameters:
+      - name: aasId
+        in: path
+        description: The Asset Administration Shell's unique id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Asset Administration Shell's unique id
+          nullable: true
+      - name: submodelIdShort
+        in: path
+        description: The Submodel's short id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Submodel's short id
+          nullable: true
+      responses:
+        "200":
+          description: Submodel retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submodel'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+        "404":
+          description: No Submodel Service Provider found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+  /shells/{aasId}/aas/submodels/{submodelIdShort}/submodel/values:
+    get:
+      tags:
+      - AssetAdministrationShellRepository
+      summary: "Retrieves the minimized version of a Submodel, i.e. only the values of SubmodelElements are serialized and returned"
+      operationId: ShellRepo_GetSubmodelValues
+      parameters:
+      - name: aasId
+        in: path
+        description: The Asset Administration Shell's unique id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Asset Administration Shell's unique id
+          nullable: true
+      - name: submodelIdShort
+        in: path
+        description: The Submodel's short id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Submodel's short id
+          nullable: true
+      responses:
+        "200":
+          description: Success
+        "404":
+          description: Submodel not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+  /shells/{aasId}/aas/submodels/{submodelIdShort}/submodel/submodelElements:
+    get:
+      tags:
+      - AssetAdministrationShellRepository
+      summary: Retrieves all Submodel-Elements from the Submodel
+      operationId: ShellRepo_GetSubmodelElements
+      parameters:
+      - name: aasId
+        in: path
+        description: The Asset Administration Shell's unique id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Asset Administration Shell's unique id
+          nullable: true
+      - name: submodelIdShort
+        in: path
+        description: The Submodel's short id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Submodel's short id
+          nullable: true
+      responses:
+        "200":
+          description: Returns a list of found Submodel-Elements
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SubmodelElement'
+        "404":
+          description: Submodel not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+  /shells/{aasId}/aas/submodels/{submodelIdShort}/submodel/submodelElements/{seIdShortPath}:
+    get:
+      tags:
+      - AssetAdministrationShellRepository
+      summary: Retrieves a specific Submodel-Element from the Submodel
+      operationId: ShellRepo_GetSubmodelElementByIdShort
+      parameters:
+      - name: aasId
+        in: path
+        description: The Asset Administration Shell's unique id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Asset Administration Shell's unique id
+          nullable: true
+      - name: submodelIdShort
+        in: path
+        description: The Submodel's short id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Submodel's short id
+          nullable: true
+      - name: seIdShortPath
+        in: path
+        description: The Submodel-Element's IdShort-Path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Submodel-Element's IdShort-Path
+          nullable: true
+      responses:
+        "200":
+          description: Returns the requested Submodel-Element
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmodelElement'
+        "404":
+          description: Submodel / Submodel-Element not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+    put:
+      tags:
+      - AssetAdministrationShellRepository
+      summary: Creates or updates a Submodel-Element at the Submodel
+      operationId: ShellRepo_PutSubmodelElement
+      parameters:
+      - name: aasId
+        in: path
+        description: The Asset Administration Shell's unique id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Asset Administration Shell's unique id
+          nullable: true
+      - name: submodelIdShort
+        in: path
+        description: The Submodel's short id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Submodel's short id
+          nullable: true
+      - name: seIdShortPath
+        in: path
+        description: The Submodel-Element's IdShort-Path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Submodel-Element's IdShort-Path
+          nullable: true
+      requestBody:
+        description: The Submodel-Element object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmodelElement'
+      responses:
+        "201":
+          description: Submodel-Element created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmodelElement'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+        "404":
+          description: Submodel not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+    delete:
+      tags:
+      - AssetAdministrationShellRepository
+      summary: Deletes a specific Submodel-Element from the Submodel
+      operationId: ShellRepo_DeleteSubmodelElementByIdShort
+      parameters:
+      - name: aasId
+        in: path
+        description: The Asset Administration Shell's unique id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Asset Administration Shell's unique id
+          nullable: true
+      - name: submodelIdShort
+        in: path
+        description: The Submodel's short id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Submodel's short id
+          nullable: true
+      - name: seIdShortPath
+        in: path
+        description: The Submodel-Element's IdShort-Path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Submodel-Element's IdShort-Path
+          nullable: true
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+        "204":
+          description: Submodel-Element deleted successfully
+        "404":
+          description: Submodel / Submodel-Element not found
+  /shells/{aasId}/aas/submodels/{submodelIdShort}/submodel/submodelElements/{seIdShortPath}/value:
+    get:
+      tags:
+      - AssetAdministrationShellRepository
+      summary: Retrieves the value of a specific Submodel-Element from the Submodel
+      operationId: ShellRepo_GetSubmodelElementValueByIdShort
+      parameters:
+      - name: aasId
+        in: path
+        description: The Asset Administration Shell's unique id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Asset Administration Shell's unique id
+          nullable: true
+      - name: submodelIdShort
+        in: path
+        description: The Submodel's short id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Submodel's short id
+          nullable: true
+      - name: seIdShortPath
+        in: path
+        description: The Submodel-Element's IdShort-Path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Submodel-Element's IdShort-Path
+          nullable: true
+      responses:
+        "200":
+          description: Returns the value of a specific Submodel-Element
+          content:
+            application/json:
+              schema:
+                type: object
+        "404":
+          description: Submodel / Submodel-Element not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+        "405":
+          description: Method not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+    put:
+      tags:
+      - AssetAdministrationShellRepository
+      summary: Updates the Submodel-Element's value
+      operationId: ShellRepo_PutSubmodelElementValueByIdShort
+      parameters:
+      - name: aasId
+        in: path
+        description: The Asset Administration Shell's unique id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Asset Administration Shell's unique id
+          nullable: true
+      - name: submodelIdShort
+        in: path
+        description: The Submodel's short id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Submodel's short id
+          nullable: true
+      - name: seIdShortPath
+        in: path
+        description: The Submodel-Element's IdShort-Path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Submodel-Element's IdShort-Path
+          nullable: true
+      requestBody:
+        description: The new value
+        content:
+          application/json:
+            schema:
+              type: object
+              description: The new value
+              nullable: true
+      responses:
+        "204":
+          description: Submodel-Element's value changed successfully
+        "404":
+          description: Submodel / Submodel-Element not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+        "405":
+          description: Method not allowed
+  /shells/{aasId}/aas/submodels/{submodelIdShort}/submodel/submodelElements/{idShortPathToOperation}/invoke:
+    post:
+      tags:
+      - AssetAdministrationShellRepository
+      summary: Invokes a specific operation from the Submodel synchronously or asynchronously
+      operationId: ShellRepo_InvokeOperationByIdShort
+      parameters:
+      - name: aasId
+        in: path
+        description: The Asset Administration Shell's unique id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Asset Administration Shell's unique id
+          nullable: true
+      - name: submodelIdShort
+        in: path
+        description: Submodel's short id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: Submodel's short id
+          nullable: true
+      - name: idShortPathToOperation
+        in: path
+        description: The IdShort path to the Operation
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The IdShort path to the Operation
+          nullable: true
+      - name: async
+        in: query
+        description: Determines whether the execution of the operation is asynchronous (true) or not (false)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          description: Determines whether the execution of the operation is asynchronous (true) or not (false)
+      requestBody:
+        description: The parameterized request object for the invocation
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvocationRequest'
+      responses:
+        "200":
+          description: Operation invoked successfully
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+        "404":
+          description: Submodel / Method handler not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+  /shells/{aasId}/aas/submodels/{submodelIdShort}/submodel/submodelElements/{idShortPathToOperation}/invocationList/{requestId}:
+    get:
+      tags:
+      - AssetAdministrationShellRepository
+      summary: Retrieves the result of an asynchronously started operation
+      operationId: ShellRepo_GetInvocationResultByIdShort
+      parameters:
+      - name: aasId
+        in: path
+        description: The Asset Administration Shell's unique id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The Asset Administration Shell's unique id
+          nullable: true
+      - name: submodelIdShort
+        in: path
+        description: Submodel's short id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: Submodel's short id
+          nullable: true
+      - name: idShortPathToOperation
+        in: path
+        description: The IdShort path to the Operation
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The IdShort path to the Operation
+          nullable: true
+      - name: requestId
+        in: path
+        description: The request id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: The request id
+          nullable: true
+      responses:
+        "200":
+          description: Result found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvocationResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+        "404":
+          description: Submodel / Operation / Request not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+components:
+  schemas:
+    AssetAdministrationShell:
+      allOf:
+      - $ref: '#/components/schemas/Identifiable'
+      - $ref: '#/components/schemas/HasDataSpecification'
+      - required:
+        - asset
+        properties:
+          derivedFrom:
+            $ref: '#/components/schemas/Reference'
+          asset:
+            $ref: '#/components/schemas/Reference'
+          submodels:
+            type: array
+            items:
+              $ref: '#/components/schemas/Reference'
+          views:
+            type: array
+            items:
+              $ref: '#/components/schemas/View'
+          conceptDictionaries:
+            type: array
+            items:
+              $ref: '#/components/schemas/ConceptDictionary'
+          security:
+            $ref: '#/components/schemas/Security'
+    Identifiable:
+      allOf:
+      - $ref: '#/components/schemas/Referable'
+      - required:
+        - identification
+        properties:
+          identification:
+            $ref: '#/components/schemas/Identifier'
+          administration:
+            $ref: '#/components/schemas/AdministrativeInformation'
+    Referable:
+      required:
+      - idShort
+      - modelType
+      type: object
+      properties:
+        idShort:
+          type: string
+        category:
+          type: string
+        description:
+          type: array
+          items:
+            $ref: '#/components/schemas/LangString'
+        parent:
+          $ref: '#/components/schemas/Reference'
+        modelType:
+          $ref: '#/components/schemas/ModelType'
+    LangString:
+      required:
+      - language
+      - text
+      type: object
+      properties:
+        language:
+          type: string
+        text:
+          type: string
+    Reference:
+      required:
+      - keys
+      type: object
+      properties:
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/Key'
+    Key:
+      required:
+      - idType
+      - local
+      - type
+      - value
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/KeyElements'
+        idType:
+          $ref: '#/components/schemas/KeyType'
+        value:
+          type: string
+        local:
+          type: boolean
+    KeyElements:
+      type: string
+      enum:
+      - Asset
+      - AssetAdministrationShell
+      - ConceptDescription
+      - Submodel
+      - AccessPermissionRule
+      - AnnotatedRelationshipElement
+      - BasicEvent
+      - Blob
+      - Capability
+      - ConceptDictionary
+      - DataElement
+      - File
+      - Entity
+      - Event
+      - MultiLanguageProperty
+      - Operation
+      - Property
+      - Range
+      - ReferenceElement
+      - RelationshipElement
+      - SubmodelElement
+      - SubmodelElementCollection
+      - View
+      - GlobalReference
+      - FragmentReference
+    KeyType:
+      type: string
+      enum:
+      - Custom
+      - IRDI
+      - IRI
+      - IdShort
+      - FragmentId
+    ModelType:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/ModelTypes'
+    ModelTypes:
+      type: string
+      enum:
+      - Asset
+      - AssetAdministrationShell
+      - ConceptDescription
+      - Submodel
+      - AccessPermissionRule
+      - AnnotatedRelationshipElement
+      - BasicEvent
+      - Blob
+      - Capability
+      - ConceptDictionary
+      - DataElement
+      - File
+      - Entity
+      - Event
+      - MultiLanguageProperty
+      - Operation
+      - Property
+      - Range
+      - ReferenceElement
+      - RelationshipElement
+      - SubmodelElement
+      - SubmodelElementCollection
+      - View
+      - GlobalReference
+      - FragmentReference
+      - Constraint
+      - Formula
+      - Qualifier
+    Identifier:
+      required:
+      - id
+      - idType
+      type: object
+      properties:
+        id:
+          type: string
+        idType:
+          $ref: '#/components/schemas/KeyType'
+    AdministrativeInformation:
+      type: object
+      properties:
+        version:
+          type: string
+        revision:
+          type: string
+    HasDataSpecification:
+      type: object
+      properties:
+        embeddedDataSpecifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmbeddedDataSpecification'
+    EmbeddedDataSpecification:
+      required:
+      - dataSpecification
+      - dataSpecificationContent
+      type: object
+      properties:
+        dataSpecification:
+          $ref: '#/components/schemas/Reference'
+        dataSpecificationContent:
+          $ref: '#/components/schemas/DataSpecificationContent'
+    DataSpecificationContent:
+      oneOf:
+      - $ref: '#/components/schemas/DataSpecificationIEC61360Content'
+      - $ref: '#/components/schemas/DataSpecificationPhysicalUnitContent'
+    DataSpecificationIEC61360Content:
+      allOf:
+      - $ref: '#/components/schemas/ValueObject'
+      - required:
+        - preferredName
+        type: object
+        properties:
+          dataType:
+            type: string
+            enum:
+            - DATE
+            - STRING
+            - STRING_TRANSLATABLE
+            - REAL_MEASURE
+            - REAL_COUNT
+            - REAL_CURRENCY
+            - BOOLEAN
+            - URL
+            - RATIONAL
+            - RATIONAL_MEASURE
+            - TIME
+            - TIMESTAMP
+          definition:
+            type: array
+            items:
+              $ref: '#/components/schemas/LangString'
+          preferredName:
+            type: array
+            items:
+              $ref: '#/components/schemas/LangString'
+          shortName:
+            type: array
+            items:
+              $ref: '#/components/schemas/LangString'
+          sourceOfDefinition:
+            type: string
+          symbol:
+            type: string
+          unit:
+            type: string
+          unitId:
+            $ref: '#/components/schemas/Reference'
+          valueFormat:
+            type: string
+          valueList:
+            $ref: '#/components/schemas/ValueList'
+          levelType:
+            type: array
+            items:
+              $ref: '#/components/schemas/LevelType'
+    ValueObject:
+      type: object
+      properties:
+        value:
+          type: string
+        valueId:
+          $ref: '#/components/schemas/Reference'
+        valueType:
+          type: string
+          enum:
+          - anyUri
+          - base64Binary
+          - boolean
+          - date
+          - dateTime
+          - dateTimeStamp
+          - decimal
+          - integer
+          - long
+          - int
+          - short
+          - byte
+          - nonNegativeInteger
+          - positiveInteger
+          - unsignedLong
+          - unsignedInt
+          - unsignedShort
+          - unsignedByte
+          - nonPositiveInteger
+          - negativeInteger
+          - double
+          - duration
+          - dayTimeDuration
+          - yearMonthDuration
+          - float
+          - gDay
+          - gMonth
+          - gMonthDay
+          - gYear
+          - gYearMonth
+          - hexBinary
+          - NOTATION
+          - QName
+          - string
+          - normalizedString
+          - token
+          - language
+          - Name
+          - NCName
+          - ENTITY
+          - ID
+          - IDREF
+          - NMTOKEN
+          - time
+    ValueList:
+      required:
+      - valueReferencePairTypes
+      type: object
+      properties:
+        valueReferencePairTypes:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/ValueReferencePairType'
+    ValueReferencePairType:
+      allOf:
+      - $ref: '#/components/schemas/ValueObject'
+    LevelType:
+      type: string
+      enum:
+      - Min
+      - Max
+      - Nom
+      - Typ
+    DataSpecificationPhysicalUnitContent:
+      required:
+      - definition
+      - unitName
+      - unitSymbol
+      type: object
+      properties:
+        unitName:
+          type: string
+        unitSymbol:
+          type: string
+        definition:
+          type: array
+          items:
+            $ref: '#/components/schemas/LangString'
+        siNotation:
+          type: string
+        siName:
+          type: string
+        dinNotation:
+          type: string
+        eceName:
+          type: string
+        eceCode:
+          type: string
+        nistName:
+          type: string
+        sourceOfDefinition:
+          type: string
+        conversionFactor:
+          type: string
+        registrationAuthorityId:
+          type: string
+        supplier:
+          type: string
+    View:
+      allOf:
+      - $ref: '#/components/schemas/Referable'
+      - $ref: '#/components/schemas/HasDataSpecification'
+      - $ref: '#/components/schemas/HasSemantics'
+      - properties:
+          containedElements:
+            type: array
+            items:
+              $ref: '#/components/schemas/Reference'
+    HasSemantics:
+      type: object
+      properties:
+        semanticId:
+          $ref: '#/components/schemas/Reference'
+    ConceptDictionary:
+      allOf:
+      - $ref: '#/components/schemas/Referable'
+      - $ref: '#/components/schemas/HasDataSpecification'
+      - properties:
+          conceptDescriptions:
+            type: array
+            items:
+              $ref: '#/components/schemas/Reference'
+    Security:
+      required:
+      - accessControlPolicyPoints
+      type: object
+      properties:
+        accessControlPolicyPoints:
+          $ref: '#/components/schemas/AccessControlPolicyPoints'
+        certificate:
+          type: array
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/BlobCertificate'
+        requiredCertificateExtension:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reference'
+    AccessControlPolicyPoints:
+      required:
+      - policyAdministrationPoint
+      - policyDecisionPoint
+      - policyEnforcementPoint
+      type: object
+      properties:
+        policyAdministrationPoint:
+          $ref: '#/components/schemas/PolicyAdministrationPoint'
+        policyDecisionPoint:
+          $ref: '#/components/schemas/PolicyDecisionPoint'
+        policyEnforcementPoint:
+          $ref: '#/components/schemas/PolicyEnforcementPoint'
+        policyInformationPoints:
+          $ref: '#/components/schemas/PolicyInformationPoints'
+    PolicyAdministrationPoint:
+      required:
+      - externalAccessControl
+      type: object
+      properties:
+        localAccessControl:
+          $ref: '#/components/schemas/AccessControl'
+        externalAccessControl:
+          type: boolean
+    AccessControl:
+      type: object
+      properties:
+        selectableSubjectAttributes:
+          $ref: '#/components/schemas/Reference'
+        defaultSubjectAttributes:
+          $ref: '#/components/schemas/Reference'
+        selectablePermissions:
+          $ref: '#/components/schemas/Reference'
+        defaultPermissions:
+          $ref: '#/components/schemas/Reference'
+        selectableEnvironmentAttributes:
+          $ref: '#/components/schemas/Reference'
+        defaultEnvironmentAttributes:
+          $ref: '#/components/schemas/Reference'
+        accessPermissionRule:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessPermissionRule'
+    AccessPermissionRule:
+      allOf:
+      - $ref: '#/components/schemas/Referable'
+      - $ref: '#/components/schemas/Qualifiable'
+      - required:
+        - targetSubjectAttributes
+        properties:
+          targetSubjectAttributes:
+            minItems: 1
+            type: array
+            items:
+              $ref: '#/components/schemas/SubjectAttributes'
+          permissionsPerObject:
+            type: array
+            items:
+              $ref: '#/components/schemas/PermissionsPerObject'
+    Qualifiable:
+      type: object
+      properties:
+        qualifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Constraint'
+    Constraint:
+      required:
+      - modelType
+      type: object
+      properties:
+        modelType:
+          $ref: '#/components/schemas/ModelType'
+    SubjectAttributes:
+      type: object
+      properties:
+        subjectAttributes:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/Reference'
+    PermissionsPerObject:
+      type: object
+      properties:
+        object:
+          $ref: '#/components/schemas/Reference'
+        targetObjectAttributes:
+          $ref: '#/components/schemas/ObjectAttributes'
+        permission:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+    ObjectAttributes:
+      type: object
+      properties:
+        objectAttribute:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/Property'
+    Property:
+      allOf:
+      - $ref: '#/components/schemas/SubmodelElement'
+      - $ref: '#/components/schemas/ValueObject'
+    SubmodelElement:
+      allOf:
+      - $ref: '#/components/schemas/Referable'
+      - $ref: '#/components/schemas/HasDataSpecification'
+      - $ref: '#/components/schemas/HasSemantics'
+      - $ref: '#/components/schemas/Qualifiable'
+      - properties:
+          kind:
+            $ref: '#/components/schemas/ModelingKind'
+    ModelingKind:
+      type: string
+      enum:
+      - Template
+      - Instance
+    Permission:
+      required:
+      - kindOfPermission
+      - permission
+      type: object
+      properties:
+        permission:
+          $ref: '#/components/schemas/Reference'
+        kindOfPermission:
+          type: string
+          enum:
+          - Allow
+          - Deny
+          - NotApplicable
+          - Undefined
+    PolicyDecisionPoint:
+      required:
+      - externalPolicyDecisionPoints
+      type: object
+      properties:
+        externalPolicyDecisionPoints:
+          type: boolean
+    PolicyEnforcementPoint:
+      required:
+      - externalPolicyEnforcementPoint
+      type: object
+      properties:
+        externalPolicyEnforcementPoint:
+          type: boolean
+    PolicyInformationPoints:
+      required:
+      - externalInformationPoint
+      type: object
+      properties:
+        internalInformationPoint:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reference'
+        externalInformationPoint:
+          type: boolean
+    BlobCertificate:
+      allOf:
+      - $ref: '#/components/schemas/Certificate'
+      - properties:
+          blobCertificate:
+            $ref: '#/components/schemas/Blob'
+          containedExtension:
+            type: array
+            items:
+              $ref: '#/components/schemas/Reference'
+          lastCertificate:
+            type: boolean
+    Certificate:
+      type: object
+    Blob:
+      allOf:
+      - $ref: '#/components/schemas/SubmodelElement'
+      - required:
+        - mimeType
+        - value
+        properties:
+          value:
+            type: string
+          mimeType:
+            type: string
+    Result:
+      type: object
+      properties:
+        entityType:
+          type: string
+          readOnly: true
+        entity:
+          type: object
+          readOnly: true
+        success:
+          type: boolean
+          readOnly: true
+        isException:
+          type: boolean
+          readOnly: true
+        messages:
+          uniqueItems: false
+          type: array
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/Message'
+    Message:
+      type: object
+      properties:
+        messageType:
+          type: string
+          enum:
+          - Unspecified
+          - Debug
+          - Information
+          - Warning
+          - Error
+          - Fatal
+          - Exception
+        code:
+          type: string
+        text:
+          type: string
+    Submodel:
+      allOf:
+      - $ref: '#/components/schemas/Identifiable'
+      - $ref: '#/components/schemas/HasDataSpecification'
+      - $ref: '#/components/schemas/Qualifiable'
+      - $ref: '#/components/schemas/HasSemantics'
+      - properties:
+          kind:
+            $ref: '#/components/schemas/ModelingKind'
+          submodelElements:
+            type: array
+            items:
+              $ref: '#/components/schemas/SubmodelElement'
+    InvocationRequest:
+      type: object
+      properties:
+        requestId:
+          type: string
+        inoutputArguments:
+          type: array
+          items:
+            $ref: '#/components/schemas/OperationVariable'
+        inputArguments:
+          type: array
+          items:
+            $ref: '#/components/schemas/OperationVariable'
+        timeout:
+          type: integer
+    OperationVariable:
+      required:
+      - value
+      type: object
+      properties:
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/Blob'
+          - $ref: '#/components/schemas/File'
+          - $ref: '#/components/schemas/Capability'
+          - $ref: '#/components/schemas/Entity'
+          - $ref: '#/components/schemas/Event'
+          - $ref: '#/components/schemas/BasicEvent'
+          - $ref: '#/components/schemas/MultiLanguageProperty'
+          - $ref: '#/components/schemas/Operation'
+          - $ref: '#/components/schemas/Property'
+          - $ref: '#/components/schemas/Range'
+          - $ref: '#/components/schemas/ReferenceElement'
+          - $ref: '#/components/schemas/RelationshipElement'
+          - $ref: '#/components/schemas/SubmodelElementCollection'
+    File:
+      allOf:
+      - $ref: '#/components/schemas/SubmodelElement'
+      - required:
+        - mimeType
+        - value
+        properties:
+          value:
+            type: string
+          mimeType:
+            type: string
+    Capability:
+      allOf:
+      - $ref: '#/components/schemas/SubmodelElement'
+    Entity:
+      allOf:
+      - $ref: '#/components/schemas/SubmodelElement'
+      - required:
+        - entityType
+        properties:
+          statements:
+            type: array
+            items:
+              $ref: '#/components/schemas/SubmodelElement'
+          entityType:
+            $ref: '#/components/schemas/EntityType'
+          asset:
+            $ref: '#/components/schemas/Reference'
+    EntityType:
+      type: string
+      enum:
+      - CoManagedEntity
+      - SelfManagedEntity
+    Event:
+      allOf:
+      - $ref: '#/components/schemas/SubmodelElement'
+    BasicEvent:
+      allOf:
+      - $ref: '#/components/schemas/Event'
+      - required:
+        - observed
+        properties:
+          observed:
+            $ref: '#/components/schemas/Reference'
+    MultiLanguageProperty:
+      allOf:
+      - $ref: '#/components/schemas/SubmodelElement'
+      - properties:
+          value:
+            type: array
+            items:
+              $ref: '#/components/schemas/LangString'
+          valueId:
+            $ref: '#/components/schemas/Reference'
+    Operation:
+      allOf:
+      - $ref: '#/components/schemas/SubmodelElement'
+      - properties:
+          inputVariable:
+            type: array
+            items:
+              $ref: '#/components/schemas/OperationVariable'
+          outputVariable:
+            type: array
+            items:
+              $ref: '#/components/schemas/OperationVariable'
+          inoutputVariable:
+            type: array
+            items:
+              $ref: '#/components/schemas/OperationVariable'
+    Range:
+      allOf:
+      - $ref: '#/components/schemas/SubmodelElement'
+      - required:
+        - max
+        - min
+        - valueType
+        properties:
+          valueType:
+            type: string
+            enum:
+            - anyUri
+            - base64Binary
+            - boolean
+            - date
+            - dateTime
+            - dateTimeStamp
+            - decimal
+            - integer
+            - long
+            - int
+            - short
+            - byte
+            - nonNegativeInteger
+            - positiveInteger
+            - unsignedLong
+            - unsignedInt
+            - unsignedShort
+            - unsignedByte
+            - nonPositiveInteger
+            - negativeInteger
+            - double
+            - duration
+            - dayTimeDuration
+            - yearMonthDuration
+            - float
+            - gDay
+            - gMonth
+            - gMonthDay
+            - gYear
+            - gYearMonth
+            - hexBinary
+            - NOTATION
+            - QName
+            - string
+            - normalizedString
+            - token
+            - language
+            - Name
+            - NCName
+            - ENTITY
+            - ID
+            - IDREF
+            - NMTOKEN
+            - time
+          min:
+            type: string
+          max:
+            type: string
+    ReferenceElement:
+      allOf:
+      - $ref: '#/components/schemas/SubmodelElement'
+      - properties:
+          value:
+            $ref: '#/components/schemas/Reference'
+    RelationshipElement:
+      allOf:
+      - $ref: '#/components/schemas/SubmodelElement'
+      - required:
+        - first
+        - second
+        properties:
+          first:
+            $ref: '#/components/schemas/Reference'
+          second:
+            $ref: '#/components/schemas/Reference'
+    SubmodelElementCollection:
+      allOf:
+      - $ref: '#/components/schemas/SubmodelElement'
+      - properties:
+          value:
+            type: array
+            items:
+              oneOf:
+              - $ref: '#/components/schemas/Blob'
+              - $ref: '#/components/schemas/File'
+              - $ref: '#/components/schemas/Capability'
+              - $ref: '#/components/schemas/Entity'
+              - $ref: '#/components/schemas/Event'
+              - $ref: '#/components/schemas/BasicEvent'
+              - $ref: '#/components/schemas/MultiLanguageProperty'
+              - $ref: '#/components/schemas/Operation'
+              - $ref: '#/components/schemas/Property'
+              - $ref: '#/components/schemas/Range'
+              - $ref: '#/components/schemas/ReferenceElement'
+              - $ref: '#/components/schemas/RelationshipElement'
+              - $ref: '#/components/schemas/SubmodelElementCollection'
+          allowDuplicates:
+            type: boolean
+          ordered:
+            type: boolean
+    InvocationResponse:
+      type: object
+      properties:
+        requestId:
+          type: string
+        inoutputArguments:
+          type: array
+          items:
+            $ref: '#/components/schemas/OperationVariable'
+        outputArguments:
+          type: array
+          items:
+            $ref: '#/components/schemas/OperationVariable'
+        operationResult:
+          $ref: '#/components/schemas/Result'
+        executionState:
+          type: string
+          enum:
+          - Initiated
+          - Running
+          - Completed
+          - Canceled
+          - Failed
+          - Timeout

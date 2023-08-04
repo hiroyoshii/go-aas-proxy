@@ -1,0 +1,15 @@
+title: get scenarigo repository
+steps:
+- title: GET https://api.github.com/repos/zoncoen/scenarigo
+  vars:
+    user: zoncoen
+    repo: scenarigo
+  protocol: http
+  request:
+    method: GET
+    url: "https://api.github.com/repos/{{vars.user}}/{{vars.repo}}"
+  expect:
+    code: OK
+    body:
+      name: "{{vars.repo}}"
+

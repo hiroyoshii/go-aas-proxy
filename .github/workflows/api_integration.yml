@@ -6,7 +6,7 @@ on:
 
 jobs:
   test:
-    name: Gen protobuf
+    name: Gen open API
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -18,25 +18,12 @@ jobs:
         run: |
           mkdir -p ./gen/source/
           BASYX_SWAGGER=https://api.swaggerhub.com/apis/BaSyx/basyx_asset_administration_shell_repository_http_rest_api/v1/swagger.yaml?resolved=true
-          curl $BASYX_SWAGGER > ./gen/source/basyx-openapi.yaml
-          go install -v github.com/google/gnostic@latest
-          go install -v github.com/googleapis/gnostic-grpc@v0.1.0
-          gnostic --grpc-out=./gen/basyx_aas ./gen/source/basyx-openapi.yaml
-      - uses: bufbuild/buf-setup-action@v1
-        with:
-          version: "latest"
-      - uses: bufbuild/buf-lint-action@v1
-      - uses: bufbuild/buf-breaking-action@v1
-        with:
-          # The 'main' branch of the GitHub repository that defines the module.
-          against: "https://github.com/hiroyoshii/go-aas-proxy.git#branch=main"
-      - name: buf format
-        run: buf format -w  
+          curl $BASYX_SWAGGER > ./gen/source/basyx-aas.yaml
       - name: generate go code
         run: |
-          go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28
-          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2  
-          buf generate
+          mkdir -p ./gen/go/
+          go install github.com/deepmap/oapi-codegen/cmd/oapi-codegen@latest  
+          oapi-codegen gen/source/basyx-aas.yaml > ./gen/go/basyx.go
       - name: commit & push
         run: |
           git add -N . # 新規ファイルを含める

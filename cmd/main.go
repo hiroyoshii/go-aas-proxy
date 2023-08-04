@@ -2,16 +2,25 @@ package main
 
 import (
 	"context"
+	"hiroyoshii/go-aas-proxy/internal/server"
 	"log"
 	"os"
 	"os/signal"
 	"sync"
 	"syscall"
 
-	"hiroyoshii/go-aas-proxy/internal/server"
+	"github.com/caarlos0/env"
 )
 
+type config struct {
+	Port string `env:"HTTP_PORT" envDefault:":8080"`
+}
+
 func main() {
+	cfg := &config{}
+	if err := env.Parse(cfg); err != nil {
+		log.Printf("%+v\n", err)
+	}
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
@@ -20,7 +29,7 @@ func main() {
 	go func() {
 		defer cancel()
 		s := <-signals
-		log.Println("hello", s.String())
+		log.Printf("terminated by %s signal\n", s.String())
 
 	}()
 
@@ -30,10 +39,10 @@ func main() {
 		panic(err)
 	}
 
-	if err := server.Serve(); err != nil {
+	if err := server.Start(cfg.Port); err != nil {
 		panic(err)
 	}
-	defer server.GracefulStop()
+	defer server.Shutdown(ctx)
 	log.Println("server started")
 	wg.Add(1)
 	go func() {
