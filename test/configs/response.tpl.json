@@ -1,0 +1,3 @@
+{
+  "idShort":"{{ (index .QueryDigitalName.Results 0).Name }}"
+}

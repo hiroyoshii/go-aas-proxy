@@ -4,11 +4,8 @@
 
 # Pipeline
 - [ ] api
-  - [x] gnostic & push
-  - [x] buf gen go code
-  - [x] buf lint
-  - [x] buf breaking check
-  - [x] buf format
+  - [x] import basyx
+  - [ ] openapi gen go
 - [ ] build
   - [ ] go build 
 - [ ] testing

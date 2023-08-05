@@ -1,0 +1,18 @@
+submodels:
+  - semanticID: "semantic"
+    queryTemplates:
+      - path: "test/configs/query_digital_name.tpl.sql"
+        dbName: "default"
+      - path: "test/configs/query_digital_spec.tpl.sql"
+        dbName: "default"
+    responseTemplatePath: "test/configs/response.tpl.json"
+databases:
+  - name: default
+    dbType: postgres
+    dbConfig:
+      host: "localhost"
+      port: 5432
+      user: "mebee"
+      password: "password"
+      database: "postgres"
+      sslmode: "disable"

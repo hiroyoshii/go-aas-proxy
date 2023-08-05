@@ -15,8 +15,9 @@ This implementation is inspired from "aas-proxy" in [Representing the Virtual: U
 
 features:
 - Open API Endpoints compatible with [Basyx API](https://app.swaggerhub.com/apis/BaSyx/basyx_asset_administration_shell_http_rest_api/v1). But only supports following Endpoints
-  - GET
-    - ⭕ /shells
+  - /shells: GET
+  - /shells/{aasId}: GET/PUT/DELETE
+  - /shells/{aasId}/aas/submodels/{submodelIdShort}: GET
 - Support multiple RDBMS(Postgres, MySQL, Oracle)
 
 # Architecture
@@ -24,8 +25,9 @@ features:
 
 # How to run
 
-## Configs
-
 ## Environments
 
+## Configs
+
 # License
+Apache License 2.0, see [LICENSE](./LICENSE).

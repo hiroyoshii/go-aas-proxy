@@ -1,0 +1,1 @@
+select 'spec' as spec;
