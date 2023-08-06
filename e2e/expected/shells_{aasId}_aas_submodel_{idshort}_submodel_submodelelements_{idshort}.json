@@ -1,0 +1,33 @@
+{
+    "modelType": {
+        "name": "Property"
+    },
+    "dataSpecification": [],
+    "embeddedDataSpecifications": [],
+    "kind": "Instance",
+    "value": "Festo AG \u0026 Co. KG",
+    "valueType": "string",
+    "idShort": "ManufacturerName",
+    "category": "PARAMETER",
+    "qualifiers": [],
+    "semanticId": {
+        "keys": [
+            {
+                "type": "ConceptDescription",
+                "local": true,
+                "value": "0173-1#02-AAO677#002",
+                "idType": "IRDI"
+            }
+        ]
+    },
+    "parent": {
+        "keys": [
+            {
+                "type": "Submodel",
+                "local": true,
+                "value": "www.company.com/ids/sm/4343_5072_7091_3242",
+                "idType": "IRI"
+            }
+        ]
+    }
+}

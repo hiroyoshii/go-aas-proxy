@@ -1,0 +1,28 @@
+{
+    "ManufacturerName": "Festo AG \u0026 Co. KG",
+    "ManufacturerProductDesignation": "OVEL Vacuum generator",
+    "PhysicalAddress": {
+        "CountryCode": "DE",
+        "Street": "Ruiter Straße 82",
+        "Zip": "73734",
+        "CityTown": "Esslingen-Berkheim",
+        "StateCounty": "Baden-Württemberg"
+    },
+    "ManufacturerProductFamily": "OVEL-5-H-10-P-VQ4-UA-Z-C-A-V1PNLK-H3",
+    "SerialNumber": "JO43",
+    "BatchNumber": "",
+    "ProductCountryOfOrigin": "DE",
+    "YearOfConstruction": 2019,
+    "Marking_CE": {
+        "CEQualificationPresent": false,
+        "File": "http://localhost:4001/aasServer/files/aasx/Nameplate/marking_ce.png"
+    },
+    "Marking_CRUUS": {
+        "CRUUSLabelingPresent": false,
+        "File": "http://localhost:4001/aasServer/files/aasx/Nameplate/marking_cruus.jpg"
+    },
+    "Marking_RCM": {
+        "RCMLabelingPresent": false,
+        "File": "http://localhost:4001/aasServer/files/aasx/Nameplate/marking_rcm.jpg"
+    }
+}

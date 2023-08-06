@@ -1,37 +1,19 @@
-# Design
-- [x] architecture + module
-- [x] from open api to grpc
 
 # Pipeline
-- [ ] api
-  - [x] import basyx
-  - [ ] openapi gen go
-- [ ] build
-  - [ ] go build 
 - [ ] testing
   - [ ] unit testing
-  - [ ] senario testing
-    - [ ] https://github.com/zoncoen/scenarigo
   - [ ] perf testing by k6.io
     - [ ] https://k6.io/blog/getting-started-with-performance-testing-in-ci-cd-using-k6/
-- [ ] security
-  - [ ] image scan
-  - [ ] fuzzing
-  - [ ] sbom
-- [ ] image
-  - [ ] image push
 - [ ] badge
   - [ ] security badge: https://github.com/ossf/scorecard
 
-# golang
-- [ ] go1.21: https://tip.golang.org/doc/go1.21
-  - [ ] slog
-- [ ] aas
-  - [ ] aas-core: 
+# scenario
+- [ ] senario testing
+  - [ ] https://github.com/zoncoen/scenarigo
+- [ ] e2e docker compose
+- [ ] e2e perf testing
+- [ ] add readme about env, cfg
 
-# images
-- [ ] docker compose
-
-
-go install github.com/zoncoen/scenarigo/cmd/scenarigo@v0.14.2
-scenarigo.exe run -c .\e2e\senariogo.yaml
+# perf
+- [ ] perf testing by k6.io
+  - [ ] https://k6.io/blog/getting-started-with-performance-testing-in-ci-cd-using-k6/

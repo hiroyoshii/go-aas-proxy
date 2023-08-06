@@ -13,21 +13,40 @@ The go-aas-proxy is asset administration shell(aas) server which is implemented 
 This implementation is inspired from "aas-proxy" in [Representing the Virtual: Using AAS to Expose DigitalAssets](https://ceur-ws.org/Vol-3291/paper5.pdf) paper.
 ![aas-proxy](./assets/aas-proxy.png)
 
-features:
-- Open API Endpoints compatible with [Basyx API](https://app.swaggerhub.com/apis/BaSyx/basyx_asset_administration_shell_http_rest_api/v1). But only supports following Endpoints
+"aas-proxy" means that submodels are configured by referencing the RDB of other applications.
+Therefore, only the AAS and the AAS-Submodel relationship can be created, updated, or deleted, while submodels are read-only.
+
+## Features
+- Open API Endpoints compatible with [Basyx API](https://app.swaggerhub.com/apis/BaSyx/basyx_asset_administration_shell_http_rest_api/v1). But only supports following endpoints:
   - /shells: GET
   - /shells/{aasId}: GET/PUT/DELETE
+  - /shells/{aasId}/aas/submodels: GET
   - /shells/{aasId}/aas/submodels/{submodelIdShort}: GET
-- Support multiple RDBMS(Postgres, MySQL, Oracle)
+  - - /shells/{aasId}/aas/submodels/{submodelIdShort}: PUT(only relation to aas)
+- Support multiple RDBMS locations and types (Postgres, MySQL)
 
-# Architecture
+Unsuported:
+- create/update/delete submodels and submodel elements
+- invocation Endpoints
+
+## Architecture
 ![architecture](./assets/architecture.drawio.png)
+- configurablity for aas
+  - query sql and stored tables (default: aas contents are stored by jsonb type)
+- configurablity for submodel
+  - reference databases per semanticID of submodel
+  - query for databases
+  - response json content for submodels
 
-# How to run
+## How to run
+* docker run
+```
+docker run hiroyoshii/go-aas-proxy:latest
+```
+* demo (docker-compose and demo deta)
+```
+./e2e/scenario_demo.sh
+```
 
-## Environments
-
-## Configs
-
-# License
+## License
 Apache License 2.0, see [LICENSE](./LICENSE).

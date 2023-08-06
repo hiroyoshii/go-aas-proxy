@@ -1,0 +1,193 @@
+[
+  {
+    "modelType": {
+      "name": "AssetAdministrationShell"
+    },
+    "idShort": "test_asset_aas",
+    "identification": {
+      "idType": "IRI",
+      "id": "www.admin-shell.io/aas-sample/1/1"
+    },
+    "dataSpecification": [],
+    "embeddedDataSpecifications": [],
+    "submodels": [
+      {
+        "keys": [
+          {
+            "type": "AssetAdministrationShell",
+            "local": false,
+            "value": "www.admin-shell.io/aas-sample/1/1",
+            "idType": "IRI"
+          },
+          {
+            "type": "Submodel",
+            "local": true,
+            "value": "de.iese.com/ids/sm/0000_000_000_001",
+            "idType": "IRI"
+          }
+        ]
+      }
+    ],
+    "asset": {
+      "keys": [
+        {
+          "type": "Asset",
+          "local": true,
+          "value": "",
+          "idType": "IRDI"
+        }
+      ],
+      "modelType": {
+        "name": "Asset"
+      },
+      "dataSpecification": [],
+      "embeddedDataSpecifications": [],
+      "idShort": "",
+      "identification": {
+        "idType": "IRDI",
+        "id": ""
+      },
+      "kind": "Instance"
+    },
+    "views": [],
+    "conceptDictionary": [],
+    "assetRef": {
+      "keys": [
+        {
+          "type": "Asset",
+          "local": true,
+          "value": "http://de.iese.com/ia234b567c8",
+          "idType": "IRI"
+        }
+      ]
+    }
+  },
+  {
+    "modelType": {
+      "name": "AssetAdministrationShell"
+    },
+    "idShort": "Festo_3S7PM0CP4BD",
+    "identification": {
+      "idType": "IRI",
+      "id": "smart.festo.com/demo/aas/1/1/454576463545648365874"
+    },
+    "dataSpecification": [],
+    "embeddedDataSpecifications": [],
+    "submodels": [
+      {
+        "keys": [
+          {
+            "type": "AssetAdministrationShell",
+            "local": false,
+            "value": "smart.festo.com/demo/aas/1/1/454576463545648365874",
+            "idType": "IRI"
+          },
+          {
+            "type": "Submodel",
+            "local": true,
+            "value": "www.company.com/ids/sm/4343_5072_7091_3242",
+            "idType": "IRI"
+          }
+        ]
+      },
+      {
+        "keys": [
+          {
+            "type": "AssetAdministrationShell",
+            "local": false,
+            "value": "smart.festo.com/demo/aas/1/1/454576463545648365874",
+            "idType": "IRI"
+          },
+          {
+            "type": "Submodel",
+            "local": true,
+            "value": "www.company.com/ids/sm/6053_5072_7091_5102",
+            "idType": "IRI"
+          }
+        ]
+      },
+      {
+        "keys": [
+          {
+            "type": "AssetAdministrationShell",
+            "local": false,
+            "value": "smart.festo.com/demo/aas/1/1/454576463545648365874",
+            "idType": "IRI"
+          },
+          {
+            "type": "Submodel",
+            "local": true,
+            "value": "smart.festo.com/demo/sm/instance/1/1/13B7CCD9BF7A3F24",
+            "idType": "IRI"
+          }
+        ]
+      },
+      {
+        "keys": [
+          {
+            "type": "AssetAdministrationShell",
+            "local": false,
+            "value": "smart.festo.com/demo/aas/1/1/454576463545648365874",
+            "idType": "IRI"
+          },
+          {
+            "type": "Submodel",
+            "local": true,
+            "value": "www.company.com/ids/sm/2543_5072_7091_2660",
+            "idType": "IRI"
+          }
+        ]
+      },
+      {
+        "keys": [
+          {
+            "type": "AssetAdministrationShell",
+            "local": false,
+            "value": "smart.festo.com/demo/aas/1/1/454576463545648365874",
+            "idType": "IRI"
+          },
+          {
+            "type": "Submodel",
+            "local": true,
+            "value": "www.company.com/ids/sm/6563_5072_7091_4267",
+            "idType": "IRI"
+          }
+        ]
+      }
+    ],
+    "asset": {
+      "keys": [
+        {
+          "type": "Asset",
+          "local": true,
+          "value": "",
+          "idType": "IRDI"
+        }
+      ],
+      "modelType": {
+        "name": "Asset"
+      },
+      "dataSpecification": [],
+      "embeddedDataSpecifications": [],
+      "idShort": "",
+      "identification": {
+        "idType": "IRDI",
+        "id": ""
+      },
+      "kind": "Instance"
+    },
+    "views": [],
+    "conceptDictionary": [],
+    "category": "CONSTANT",
+    "assetRef": {
+      "keys": [
+        {
+          "type": "Asset",
+          "local": true,
+          "value": "HTTP://PK.FESTO.COM/3S7PM0CP4BD",
+          "idType": "IRI"
+        }
+      ]
+    }
+  }
+]

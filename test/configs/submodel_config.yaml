@@ -1,5 +1,5 @@
 submodels:
-  - semanticID: "semantic"
+  - semanticID: "https://www.hsu-hh.de/aut/aas/nameplate"
     queryTemplates:
       - path: "test/configs/query_digital_name.tpl.sql"
         dbName: "default"
