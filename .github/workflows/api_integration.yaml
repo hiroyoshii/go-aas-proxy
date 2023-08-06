@@ -1,7 +1,6 @@
 name: Basyx API Integration
 
 on:
-  push:
   workflow_dispatch:
 
 jobs:
