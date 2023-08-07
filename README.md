@@ -1,7 +1,7 @@
 <div align="center">
-<h1>go AAS proxy</h1>
+<h1>go-aas-proxy</h1>
 <p>
-Asset Administration Shell(AAS) to RDBMS backend proxy
+Asset Administration Shell(AAS) proxy for RDBMS backend
 </p>
 
 </div>
@@ -18,16 +18,16 @@ Therefore, only the AAS and the AAS-Submodel relationship can be created, update
 
 ## Features
 - Open API Endpoints compatible with [Basyx API](https://app.swaggerhub.com/apis/BaSyx/basyx_asset_administration_shell_http_rest_api/v1). But only supports following endpoints:
-  - /shells: GET
-  - /shells/{aasId}: GET/PUT/DELETE
-  - /shells/{aasId}/aas/submodels: GET
-  - /shells/{aasId}/aas/submodels/{submodelIdShort}: GET
-  - - /shells/{aasId}/aas/submodels/{submodelIdShort}: PUT(only relation to aas)
+  - :white_check_mark: /shells: GET
+  - :white_check_mark: /shells/{aasId}: GET/PUT/DELETE
+  - :white_check_mark: /shells/{aasId}/aas/submodels: GET
+  - :white_check_mark: /shells/{aasId}/aas/submodels/{submodelIdShort}: GET
+  - :warning:	 /shells/{aasId}/aas/submodels/{submodelIdShort}: PUT(only relation to aas)
 - Support multiple RDBMS locations and types (Postgres, MySQL)
 
 Unsuported:
-- create/update/delete submodels and submodel elements
-- invocation Endpoints
+- :x: create/update/delete submodels and submodel elements
+- :x: Invocation Endpoints
 
 ## Architecture
 ![architecture](./assets/architecture.drawio.png)
