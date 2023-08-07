@@ -8,7 +8,7 @@ Asset Administration Shell(AAS) proxy for RDBMS backend
 
 ## About
 
-The go-aas-proxy is asset administration shell(aas) server which is implemented by go and proxy to RDBMS backend. **not for production ready**.
+The go-aas-proxy is asset administration shell(aas) server which is implemented by go and proxy to RDBMS backend. **not ready for production**.
 
 This implementation is inspired from "aas-proxy" in [Representing the Virtual: Using AAS to Expose DigitalAssets](https://ceur-ws.org/Vol-3291/paper5.pdf) paper.
 ![aas-proxy](./assets/aas-proxy.png)
