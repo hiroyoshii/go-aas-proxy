@@ -1,4 +1,4 @@
-name: Main Workflow
+name: integration testing
 on: [push]
 jobs:
   build:

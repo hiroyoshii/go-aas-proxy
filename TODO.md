@@ -13,7 +13,7 @@
 - [ ] e2e docker compose
 - [ ] e2e perf testing
 - [ ] add readme about env, cfg
-
+- [ ] execute aas ddl if not exist
 # perf
 - [ ] perf testing by k6.io
   - [ ] https://k6.io/blog/getting-started-with-performance-testing-in-ci-cd-using-k6/

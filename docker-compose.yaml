@@ -1,9 +1,3 @@
-# If you want to dive go build-env: docker-compose run --rm app bash
-
-# dependency
-# - GO_VERSION
-# - NETRC
-
 version: "3.4"
 
 services:

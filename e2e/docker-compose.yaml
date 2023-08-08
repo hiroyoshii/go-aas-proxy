@@ -1,0 +1,52 @@
+
+version: "3.4"
+
+services:
+  app:
+    image: hiroyoshii/go-aas-proxy:develop
+    volumes:
+      - ${PWD}e2e/applications/configs:/app/config
+    environment:
+      HTTP_PORT: ":8081"
+      AAS_DB_HOST: postgres_aas
+      AAS_DB_PORT: 5432
+      AAS_DB_USER: mebee
+      AAS_DB_PASSWORD: password
+      AAS_DB_DATABASE: aas
+      SUBMODEL_CONFIG_PATH: /app/configs/submodel_config.yaml
+
+  postgres_aas:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: mebee
+      POSTGRES_PASSWORD: password
+      PGPASSWORD: password123
+      POSTGRES_DB: aas
+      TZ: "Asia/Tokyo"
+    ports:
+      - 5432:5432
+
+  postgres_submodel1:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: mebee
+      POSTGRES_PASSWORD: password
+      PGPASSWORD: password123
+      POSTGRES_DB: submodel1
+      TZ: "Asia/Tokyo"
+    ports:
+      - 5433:5432
+
+  postgres_submodel2:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: mebee
+      POSTGRES_PASSWORD: password
+      PGPASSWORD: password123
+      POSTGRES_DB: submodel2
+      TZ: "Asia/Tokyo"
+    ports:
+      - 5434:5432

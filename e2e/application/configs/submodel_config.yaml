@@ -1,0 +1,30 @@
+submodels:
+  - semanticID: "https://www.hsu-hh.de/aut/aas/nameplate"
+    queryTemplates:
+      - path: "/app/config/query_digital_name.tpl.sql"
+        dbName: "submodel1"
+    responseTemplatePath: "/app/config/test/configs/sm_nameplate/response.tpl.json"
+  - semanticID: "https://www.hsu-hh.de/aut/aas/identification"
+    queryTemplates:
+      - path: "/app/config/query_digital_identification.tpl.sql"
+        dbName: "submodel2"
+    responseTemplatePath: "/app/config/test/configs/sm_identification/response.tpl.json"
+databases:
+  - name: submodel1
+    dbType: postgres
+    dbConfig:
+      host: "submodel1"
+      port: 5432
+      user: "mebee"
+      password: "password"
+      database: "postgres"
+      sslmode: "disable"
+  - name: submodel2
+    dbType: postgres
+    dbConfig:
+      host: "submodel2"
+      port: 5432
+      user: "mebee"
+      password: "password"
+      database: "postgres"
+      sslmode: "disable"

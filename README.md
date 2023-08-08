@@ -3,8 +3,12 @@
 <p>
 Asset Administration Shell(AAS) proxy for RDBMS backend
 </p>
-
 </div>
+
+[![Build](https://github.com/hiroyoshii/go-aas-proxy/actions/workflows/go_application.yaml/badge.svg)](https://github.com/hiroyoshii/go-aas-proxy/actions/workflows/go_application.yaml)
+[![CodeQL](https://github.com/hiroyoshii/go-aas-proxy/actions/workflows/codeql.yml/badge.svg)](https://github.com/hiroyoshii/go-aas-proxy/actions/workflows/codeql.yml)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/hiroyoshii/go-aas-proxy/badge)](https://securityscorecards.dev/viewer/?uri=github.com/hiroyoshii/go-aas-proxy)
+[![License](https://img.shields.io/github/license/hiroyoshii/go-aas-proxy)](LICENSE)
 
 ## About
 

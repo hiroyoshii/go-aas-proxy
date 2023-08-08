@@ -1,0 +1,680 @@
+{
+  "idShort": "Nameplate",
+  "identification": {
+      "idType": "IRI",
+      "id": "www.company.com/ids/sm/4343_5072_7091_3242"
+  },
+  "dataSpecification": [],
+  "embeddedDataSpecifications": [],
+  "modelType": {
+      "name": "Submodel"
+  },
+  "kind": "Instance",
+  "submodelElements": [
+      {
+          "modelType": {
+              "name": "Property"
+          },
+          "dataSpecification": [],
+          "embeddedDataSpecifications": [],
+          "kind": "Instance",
+          "value": "Festo AG \u0026 Co. KG",
+          "valueType": "string",
+          "idShort": "ManufacturerName",
+          "category": "PARAMETER",
+          "qualifiers": [],
+          "semanticId": {
+              "keys": [
+                  {
+                      "type": "ConceptDescription",
+                      "local": true,
+                      "value": "0173-1#02-AAO677#002",
+                      "idType": "IRDI"
+                  }
+              ]
+          },
+          "parent": {
+              "keys": [
+                  {
+                      "type": "Submodel",
+                      "local": true,
+                      "value": "www.company.com/ids/sm/4343_5072_7091_3242",
+                      "idType": "IRI"
+                  }
+              ]
+          }
+      },
+      {
+          "modelType": {
+              "name": "Property"
+          },
+          "dataSpecification": [],
+          "embeddedDataSpecifications": [],
+          "kind": "Instance",
+          "value": "OVEL Vacuum generator",
+          "valueType": "string",
+          "idShort": "ManufacturerProductDesignation",
+          "category": "PARAMETER",
+          "qualifiers": [],
+          "semanticId": {
+              "keys": [
+                  {
+                      "type": "ConceptDescription",
+                      "local": true,
+                      "value": "0173-1#02-AAW338#001",
+                      "idType": "IRDI"
+                  }
+              ]
+          },
+          "parent": {
+              "keys": [
+                  {
+                      "type": "Submodel",
+                      "local": true,
+                      "value": "www.company.com/ids/sm/4343_5072_7091_3242",
+                      "idType": "IRI"
+                  }
+              ]
+          }
+      },
+      {
+          "modelType": {
+              "name": "SubmodelElementCollection"
+          },
+          "dataSpecification": [],
+          "embeddedDataSpecifications": [],
+          "kind": "Instance",
+          "value": [
+              {
+                  "modelType": {
+                      "name": "Property"
+                  },
+                  "dataSpecification": [],
+                  "embeddedDataSpecifications": [],
+                  "kind": "Instance",
+                  "value": "DE",
+                  "valueType": "string",
+                  "idShort": "CountryCode",
+                  "category": "PARAMETER",
+                  "qualifiers": [],
+                  "semanticId": {
+                      "keys": [
+                          {
+                              "type": "ConceptDescription",
+                              "local": true,
+                              "value": "0173-1#02-AAO730#001",
+                              "idType": "IRDI"
+                          }
+                      ]
+                  }
+              },
+              {
+                  "modelType": {
+                      "name": "Property"
+                  },
+                  "dataSpecification": [],
+                  "embeddedDataSpecifications": [],
+                  "kind": "Instance",
+                  "value": "Ruiter Straße 82",
+                  "valueType": "string",
+                  "idShort": "Street",
+                  "category": "PARAMETER",
+                  "qualifiers": [],
+                  "semanticId": {
+                      "keys": [
+                          {
+                              "type": "ConceptDescription",
+                              "local": true,
+                              "value": "0173-1#02-AAO128#001",
+                              "idType": "IRDI"
+                          }
+                      ]
+                  }
+              },
+              {
+                  "modelType": {
+                      "name": "Property"
+                  },
+                  "dataSpecification": [],
+                  "embeddedDataSpecifications": [],
+                  "kind": "Instance",
+                  "value": "73734",
+                  "valueType": "string",
+                  "idShort": "Zip",
+                  "category": "PARAMETER",
+                  "qualifiers": [],
+                  "semanticId": {
+                      "keys": [
+                          {
+                              "type": "ConceptDescription",
+                              "local": true,
+                              "value": "0173-1#02-AAO129#002",
+                              "idType": "IRDI"
+                          }
+                      ]
+                  }
+              },
+              {
+                  "modelType": {
+                      "name": "Property"
+                  },
+                  "dataSpecification": [],
+                  "embeddedDataSpecifications": [],
+                  "kind": "Instance",
+                  "value": "Esslingen-Berkheim",
+                  "valueType": "string",
+                  "idShort": "CityTown",
+                  "category": "PARAMETER",
+                  "qualifiers": [],
+                  "semanticId": {
+                      "keys": [
+                          {
+                              "type": "ConceptDescription",
+                              "local": true,
+                              "value": "0173-1#02-AAO132#001",
+                              "idType": "IRDI"
+                          }
+                      ]
+                  }
+              },
+              {
+                  "modelType": {
+                      "name": "Property"
+                  },
+                  "dataSpecification": [],
+                  "embeddedDataSpecifications": [],
+                  "kind": "Instance",
+                  "value": "Baden-Württemberg",
+                  "valueType": "string",
+                  "idShort": "StateCounty",
+                  "category": "PARAMETER",
+                  "qualifiers": [],
+                  "semanticId": {
+                      "keys": [
+                          {
+                              "type": "ConceptDescription",
+                              "local": true,
+                              "value": "0173-1#02-AAO133#002",
+                              "idType": "IRDI"
+                          }
+                      ]
+                  }
+              }
+          ],
+          "ordered": false,
+          "allowDuplicates": false,
+          "idShort": "PhysicalAddress",
+          "category": "PARAMETER",
+          "qualifiers": [],
+          "semanticId": {
+              "keys": [
+                  {
+                      "type": "ConceptDescription",
+                      "local": true,
+                      "value": "https://www.hsu-hh.de/aut/aas/physicaladdress",
+                      "idType": "IRI"
+                  }
+              ]
+          },
+          "parent": {
+              "keys": [
+                  {
+                      "type": "Submodel",
+                      "local": true,
+                      "value": "www.company.com/ids/sm/4343_5072_7091_3242",
+                      "idType": "IRI"
+                  }
+              ]
+          }
+      },
+      {
+          "modelType": {
+              "name": "Property"
+          },
+          "dataSpecification": [],
+          "embeddedDataSpecifications": [],
+          "kind": "Instance",
+          "value": "OVEL-5-H-10-P-VQ4-UA-Z-C-A-V1PNLK-H3",
+          "valueType": "string",
+          "idShort": "ManufacturerProductFamily",
+          "category": "PARAMETER",
+          "qualifiers": [],
+          "semanticId": {
+              "keys": [
+                  {
+                      "type": "ConceptDescription",
+                      "local": true,
+                      "value": "0173-1#02-AAU731#001",
+                      "idType": "IRDI"
+                  }
+              ]
+          },
+          "parent": {
+              "keys": [
+                  {
+                      "type": "Submodel",
+                      "local": true,
+                      "value": "www.company.com/ids/sm/4343_5072_7091_3242",
+                      "idType": "IRI"
+                  }
+              ]
+          }
+      },
+      {
+          "modelType": {
+              "name": "Property"
+          },
+          "dataSpecification": [],
+          "embeddedDataSpecifications": [],
+          "kind": "Instance",
+          "value": "JO43",
+          "valueType": "string",
+          "idShort": "SerialNumber",
+          "category": "PARAMETER",
+          "qualifiers": [],
+          "semanticId": {
+              "keys": [
+                  {
+                      "type": "ConceptDescription",
+                      "local": true,
+                      "value": "0173-1#02-AAM556#002",
+                      "idType": "IRDI"
+                  }
+              ]
+          },
+          "parent": {
+              "keys": [
+                  {
+                      "type": "Submodel",
+                      "local": true,
+                      "value": "www.company.com/ids/sm/4343_5072_7091_3242",
+                      "idType": "IRI"
+                  }
+              ]
+          }
+      },
+      {
+          "modelType": {
+              "name": "Property"
+          },
+          "dataSpecification": [],
+          "embeddedDataSpecifications": [],
+          "kind": "Instance",
+          "value": "",
+          "valueType": "string",
+          "idShort": "BatchNumber",
+          "category": "PARAMETER",
+          "qualifiers": [],
+          "semanticId": {
+              "keys": [
+                  {
+                      "type": "ConceptDescription",
+                      "local": true,
+                      "value": "0173-1#02-AAQ196#001",
+                      "idType": "IRDI"
+                  }
+              ]
+          },
+          "parent": {
+              "keys": [
+                  {
+                      "type": "Submodel",
+                      "local": true,
+                      "value": "www.company.com/ids/sm/4343_5072_7091_3242",
+                      "idType": "IRI"
+                  }
+              ]
+          }
+      },
+      {
+          "modelType": {
+              "name": "Property"
+          },
+          "dataSpecification": [],
+          "embeddedDataSpecifications": [],
+          "kind": "Instance",
+          "value": "DE",
+          "valueType": "string",
+          "idShort": "ProductCountryOfOrigin",
+          "category": "PARAMETER",
+          "qualifiers": [],
+          "semanticId": {
+              "keys": [
+                  {
+                      "type": "ConceptDescription",
+                      "local": true,
+                      "value": "0173-1#02-AAO841#001",
+                      "idType": "IRDI"
+                  }
+              ]
+          },
+          "parent": {
+              "keys": [
+                  {
+                      "type": "Submodel",
+                      "local": true,
+                      "value": "www.company.com/ids/sm/4343_5072_7091_3242",
+                      "idType": "IRI"
+                  }
+              ]
+          }
+      },
+      {
+          "modelType": {
+              "name": "Property"
+          },
+          "dataSpecification": [],
+          "embeddedDataSpecifications": [],
+          "kind": "Instance",
+          "value": "2019",
+          "valueType": "int",
+          "idShort": "YearOfConstruction",
+          "category": "PARAMETER",
+          "qualifiers": [],
+          "semanticId": {
+              "keys": [
+                  {
+                      "type": "ConceptDescription",
+                      "local": true,
+                      "value": "0173-1#02-AAP906#001",
+                      "idType": "IRDI"
+                  }
+              ]
+          },
+          "parent": {
+              "keys": [
+                  {
+                      "type": "Submodel",
+                      "local": true,
+                      "value": "www.company.com/ids/sm/4343_5072_7091_3242",
+                      "idType": "IRI"
+                  }
+              ]
+          }
+      },
+      {
+          "modelType": {
+              "name": "SubmodelElementCollection"
+          },
+          "dataSpecification": [],
+          "embeddedDataSpecifications": [],
+          "kind": "Instance",
+          "value": [
+              {
+                  "modelType": {
+                      "name": "Property"
+                  },
+                  "dataSpecification": [],
+                  "embeddedDataSpecifications": [],
+                  "kind": "Instance",
+                  "value": false,
+                  "valueId": {
+                      "keys": [
+                          {
+                              "type": "GlobalReference",
+                              "local": false,
+                              "value": "0173-1#07-CAA016#001",
+                              "idType": "IRDI"
+                          }
+                      ]
+                  },
+                  "valueType": "boolean",
+                  "idShort": "CEQualificationPresent",
+                  "category": "PARAMETER",
+                  "qualifiers": [],
+                  "semanticId": {
+                      "keys": [
+                          {
+                              "type": "ConceptDescription",
+                              "local": true,
+                              "value": "0173-1#02-BAF053#008",
+                              "idType": "IRDI"
+                          }
+                      ]
+                  }
+              },
+              {
+                  "modelType": {
+                      "name": "File"
+                  },
+                  "dataSpecification": [],
+                  "embeddedDataSpecifications": [],
+                  "kind": "Instance",
+                  "value": "http://localhost:4001/aasServer/files/aasx/Nameplate/marking_ce.png",
+                  "mimeType": "image/png",
+                  "idShort": "File",
+                  "category": "PARAMETER",
+                  "qualifiers": [],
+                  "semanticId": {
+                      "keys": [
+                          {
+                              "type": "ConceptDescription",
+                              "local": true,
+                              "value": "0173-1#02-AAD005#008",
+                              "idType": "IRDI"
+                          }
+                      ]
+                  }
+              }
+          ],
+          "ordered": false,
+          "allowDuplicates": false,
+          "idShort": "Marking_CE",
+          "category": "PARAMETER",
+          "qualifiers": [],
+          "semanticId": {
+              "keys": [
+                  {
+                      "type": "ConceptDescription",
+                      "local": true,
+                      "value": "https://www.hsu-hh.de/aut/aas/productmarking",
+                      "idType": "IRI"
+                  }
+              ]
+          },
+          "parent": {
+              "keys": [
+                  {
+                      "type": "Submodel",
+                      "local": true,
+                      "value": "www.company.com/ids/sm/4343_5072_7091_3242",
+                      "idType": "IRI"
+                  }
+              ]
+          }
+      },
+      {
+          "modelType": {
+              "name": "SubmodelElementCollection"
+          },
+          "dataSpecification": [],
+          "embeddedDataSpecifications": [],
+          "kind": "Instance",
+          "value": [
+              {
+                  "modelType": {
+                      "name": "Property"
+                  },
+                  "dataSpecification": [],
+                  "embeddedDataSpecifications": [],
+                  "kind": "Instance",
+                  "value": false,
+                  "valueId": {
+                      "keys": [
+                          {
+                              "type": "GlobalReference",
+                              "local": false,
+                              "value": "0173-1#07-CAA016#001",
+                              "idType": "IRDI"
+                          }
+                      ]
+                  },
+                  "valueType": "boolean",
+                  "idShort": "CRUUSLabelingPresent",
+                  "category": "PARAMETER",
+                  "qualifiers": [],
+                  "semanticId": {
+                      "keys": [
+                          {
+                              "type": "ConceptDescription",
+                              "local": true,
+                              "value": "0173-1#02-AAR528#005",
+                              "idType": "IRDI"
+                          }
+                      ]
+                  }
+              },
+              {
+                  "modelType": {
+                      "name": "File"
+                  },
+                  "dataSpecification": [],
+                  "embeddedDataSpecifications": [],
+                  "kind": "Instance",
+                  "value": "http://localhost:4001/aasServer/files/aasx/Nameplate/marking_cruus.jpg",
+                  "mimeType": "image/png",
+                  "idShort": "File",
+                  "category": "PARAMETER",
+                  "qualifiers": [],
+                  "semanticId": {
+                      "keys": [
+                          {
+                              "type": "ConceptDescription",
+                              "local": true,
+                              "value": "0173-1#02-AAD005#008",
+                              "idType": "IRDI"
+                          }
+                      ]
+                  }
+              }
+          ],
+          "ordered": false,
+          "allowDuplicates": false,
+          "idShort": "Marking_CRUUS",
+          "category": "PARAMETER",
+          "qualifiers": [],
+          "semanticId": {
+              "keys": [
+                  {
+                      "type": "ConceptDescription",
+                      "local": true,
+                      "value": "https://www.hsu-hh.de/aut/aas/productmarking",
+                      "idType": "IRI"
+                  }
+              ]
+          },
+          "parent": {
+              "keys": [
+                  {
+                      "type": "Submodel",
+                      "local": true,
+                      "value": "www.company.com/ids/sm/4343_5072_7091_3242",
+                      "idType": "IRI"
+                  }
+              ]
+          }
+      },
+      {
+          "modelType": {
+              "name": "SubmodelElementCollection"
+          },
+          "dataSpecification": [],
+          "embeddedDataSpecifications": [],
+          "kind": "Instance",
+          "value": [
+              {
+                  "modelType": {
+                      "name": "Property"
+                  },
+                  "dataSpecification": [],
+                  "embeddedDataSpecifications": [],
+                  "kind": "Instance",
+                  "value": false,
+                  "valueType": "boolean",
+                  "idShort": "RCMLabelingPresent",
+                  "category": "PARAMETER",
+                  "qualifiers": [],
+                  "semanticId": {
+                      "keys": [
+                          {
+                              "type": "ConceptDescription",
+                              "local": true,
+                              "value": "0173-1#02-AAR528#005",
+                              "idType": "IRDI"
+                          }
+                      ]
+                  }
+              },
+              {
+                  "modelType": {
+                      "name": "File"
+                  },
+                  "dataSpecification": [],
+                  "embeddedDataSpecifications": [],
+                  "kind": "Instance",
+                  "value": "http://localhost:4001/aasServer/files/aasx/Nameplate/marking_rcm.jpg",
+                  "mimeType": "image/png",
+                  "idShort": "File",
+                  "category": "PARAMETER",
+                  "qualifiers": [],
+                  "semanticId": {
+                      "keys": [
+                          {
+                              "type": "ConceptDescription",
+                              "local": true,
+                              "value": "0173-1#02-AAD005#008",
+                              "idType": "IRDI"
+                          }
+                      ]
+                  }
+              }
+          ],
+          "ordered": false,
+          "allowDuplicates": false,
+          "idShort": "Marking_RCM",
+          "category": "PARAMETER",
+          "qualifiers": [],
+          "semanticId": {
+              "keys": [
+                  {
+                      "type": "ConceptDescription",
+                      "local": true,
+                      "value": "https://www.hsu-hh.de/aut/aas/productmarking",
+                      "idType": "IRI"
+                  }
+              ]
+          },
+          "parent": {
+              "keys": [
+                  {
+                      "type": "Submodel",
+                      "local": true,
+                      "value": "www.company.com/ids/sm/4343_5072_7091_3242",
+                      "idType": "IRI"
+                  }
+              ]
+          }
+      }
+  ],
+  "semanticId": {
+      "keys": [
+          {
+              "type": "GlobalReference",
+              "local": false,
+              "value": "https://www.hsu-hh.de/aut/aas/nameplate",
+              "idType": "IRI"
+          }
+      ]
+  },
+  "qualifiers": [],
+  "parent": {
+      "keys": [
+          {
+              "type": "AssetAdministrationShell",
+              "local": false,
+              "value": "smart.festo.com/demo/aas/1/1/454576463545648365874",
+              "idType": "IRI"
+          }
+      ]
+  }
+}
