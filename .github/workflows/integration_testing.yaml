@@ -1,5 +1,5 @@
 name: integration testing
-on: [push]
+on: [workflow_dispatch]
 jobs:
   build:
     name: Run k6 test
