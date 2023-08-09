@@ -108,7 +108,7 @@ func (s Server) ShellRepoGetSubmodelsFromShell(ctx echo.Context, aasId string) e
 	}
 	res := []*basyxAas.Submodel{}
 	for id, semantic := range id2Semantic {
-		b, err := s.submodelCli.Get(semantic, id)
+		b, err := s.submodelCli.Get(aasId, semantic, id)
 		if err != nil {
 			log.Printf("failed to retrieved submodel: %v\n", err)
 			return err
@@ -152,7 +152,7 @@ func (s Server) GetShellsAasIdAasSubmodelsSubmodelIdShort(ctx echo.Context, aasI
 	}
 	var res *basyxAas.Submodel
 	for _, semantic := range id2Semantic {
-		b, err := s.submodelCli.Get(semantic, submodelIdShort)
+		b, err := s.submodelCli.Get(aasId, semantic, submodelIdShort)
 		if err != nil {
 			log.Printf("failed to retrieved submodel: %v\n", err)
 			return err
@@ -191,7 +191,7 @@ func (s Server) ShellRepoPutSubmodelToShell(ctx echo.Context, aasId string, subm
 	if len(subm.SemanticId.Keys) == 1 {
 		semanticId = subm.SemanticId.Keys[0].Value
 	}
-	sb, err := s.submodelCli.Get(semanticId, submodelIdShort)
+	sb, err := s.submodelCli.Get(aasId, semanticId, submodelIdShort)
 	if err != nil {
 		log.Printf("failed to retrieved submodel: %v\n", err)
 		return err

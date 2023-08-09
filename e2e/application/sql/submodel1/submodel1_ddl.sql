@@ -9,8 +9,6 @@ CREATE TABLE product (
     id VARCHAR(255) PRIMARY KEY,
     serial_number VARCHAR(255),
     batch_number VARCHAR(255),
-    country_of_origin VARCHAR(10),
-    construction_year INTEGER,
     manufacturer_id VARCHAR(255),
     FOREIGN KEY (manufacturer_id) REFERENCES manufacturer (id) ON DELETE CASCADE
 );

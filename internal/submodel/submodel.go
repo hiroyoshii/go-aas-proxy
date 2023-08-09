@@ -18,7 +18,7 @@ import (
 )
 
 type Submodel interface {
-	Get(semanticID, submodelIdShort string) ([]byte, error)
+	Get(aasId, semanticID, submodelIdShort string) ([]byte, error)
 }
 
 type submodel struct {
@@ -91,7 +91,7 @@ func NewSubmodel() (Submodel, error) {
 		qtlps := map[string][]*template.Template{}
 		for _, q := range s.QueryTemplates {
 			tpl := template.Must(template.ParseFiles(q.Path))
-			tpl.Funcs(sprig.FuncMap())
+			tpl = tpl.Funcs(sprig.FuncMap())
 			if qtlps[q.DbName] == nil {
 				qtlps[q.DbName] = []*template.Template{}
 			}
@@ -99,7 +99,7 @@ func NewSubmodel() (Submodel, error) {
 		}
 		qfileMap[s.SemanticID] = qtlps
 		tpl := template.Must(template.ParseFiles(s.ResponseTemplatePath))
-		tpl.Funcs(sprig.FuncMap())
+		tpl = tpl.Funcs(sprig.FuncMap())
 		respTpl[s.SemanticID] = tpl
 	}
 
@@ -110,7 +110,7 @@ func NewSubmodel() (Submodel, error) {
 	}, nil
 }
 
-func (a *submodel) Get(semanticID, submodelIdShort string) ([]byte, error) {
+func (a *submodel) Get(aasId, semanticID, submodelIdShort string) ([]byte, error) {
 	if a.respTpl[semanticID] == nil {
 		return []byte{}, nil
 	}
@@ -119,7 +119,7 @@ func (a *submodel) Get(semanticID, submodelIdShort string) ([]byte, error) {
 	for k, v := range a.queryDbTplNameMap[semanticID] {
 		for _, file := range v {
 			writer := new(strings.Builder)
-			err := file.Execute(writer, map[string]interface{}{"SubmodelIdShort": submodelIdShort})
+			err := file.Execute(writer, map[string]interface{}{"AasID": aasId, "SubmodelIdShort": submodelIdShort})
 			if err != nil {
 				log.Fatalln(err)
 				return nil, err
