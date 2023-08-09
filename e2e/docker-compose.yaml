@@ -6,7 +6,6 @@ services:
     image: hiroyoshii/go-aas-proxy:develop
     volumes:
       - ${PWD}/e2e/application/configs:/app/configs
-    # entrypoint: /bin/sh
     environment:
       HTTP_PORT: ":8081"
       AAS_DB_HOST: postgres_aas

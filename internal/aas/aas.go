@@ -51,8 +51,9 @@ func NewAas() (Aas, error) {
 		log.Printf("%+v\n", err)
 		return nil, err
 	}
-	tpl := template.Must(template.ParseFiles(cfg.AasQuerySqlPath))
-	tpl = tpl.Funcs(sprig.FuncMap())
+	tpl := template.Must(
+		template.New("base").Funcs(sprig.FuncMap()).ParseFiles(cfg.AasQuerySqlPath),
+	)
 
 	source := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=%s", cfg.AasDbHost, cfg.AasDbPort, cfg.AasDbUser, cfg.AasDbPassword, cfg.AasDbDatabase, cfg.AasDbSslMode)
 	db, err := sql.Open("postgres", source)

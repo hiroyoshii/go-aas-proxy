@@ -90,16 +90,18 @@ func NewSubmodel() (Submodel, error) {
 	for _, s := range t.SubmodelConfigs {
 		qtlps := map[string][]*template.Template{}
 		for _, q := range s.QueryTemplates {
-			tpl := template.Must(template.ParseFiles(q.Path))
-			tpl = tpl.Funcs(sprig.FuncMap())
+			tpl := template.Must(
+				template.New("base").Funcs(sprig.FuncMap()).ParseFiles(q.Path),
+			)
 			if qtlps[q.DbName] == nil {
 				qtlps[q.DbName] = []*template.Template{}
 			}
 			qtlps[q.DbName] = append(qtlps[q.DbName], tpl)
 		}
 		qfileMap[s.SemanticID] = qtlps
-		tpl := template.Must(template.ParseFiles(s.ResponseTemplatePath))
-		tpl = tpl.Funcs(sprig.FuncMap())
+		tpl := template.Must(
+			template.New("base").Funcs(sprig.FuncMap()).ParseFiles(s.ResponseTemplatePath),
+		)
 		respTpl[s.SemanticID] = tpl
 	}
 
