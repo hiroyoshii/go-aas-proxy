@@ -5,5 +5,5 @@ select
 from
     digital_product
 WHERE
-    product_id = '{{ last (splitList "/".AasID) }}'
+    product_id = '{{ last (splitList "/" .AasID) }}'
 ;

@@ -6,6 +6,7 @@ import (
 	"hiroyoshii/go-aas-proxy/internal/sqlutility"
 	"log"
 	"os"
+	"path/filepath"
 	"strings"
 	"text/template"
 
@@ -91,7 +92,7 @@ func NewSubmodel() (Submodel, error) {
 		qtlps := map[string][]*template.Template{}
 		for _, q := range s.QueryTemplates {
 			tpl := template.Must(
-				template.New("base").Funcs(sprig.FuncMap()).ParseFiles(q.Path),
+				template.New(filepath.Base(q.Path)).Funcs(sprig.FuncMap()).ParseFiles(q.Path),
 			)
 			if qtlps[q.DbName] == nil {
 				qtlps[q.DbName] = []*template.Template{}
@@ -100,7 +101,7 @@ func NewSubmodel() (Submodel, error) {
 		}
 		qfileMap[s.SemanticID] = qtlps
 		tpl := template.Must(
-			template.New("base").Funcs(sprig.FuncMap()).ParseFiles(s.ResponseTemplatePath),
+			template.New(filepath.Base(s.ResponseTemplatePath)).Funcs(sprig.FuncMap()).ParseFiles(s.ResponseTemplatePath),
 		)
 		respTpl[s.SemanticID] = tpl
 	}

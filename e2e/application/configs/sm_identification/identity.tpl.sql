@@ -13,5 +13,5 @@ from
     left join product on product.manufacturer_id = manufacturer.id
     left join contact_info on contact_info.manufacturer_id = manufacturer.id
 WHERE
-    product.id = '{{ last (splitList "/".AasID) }}'
+    product.id = '{{ last (splitList "/" .AasID) }}'
 ;

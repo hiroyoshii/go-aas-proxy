@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"path/filepath"
 	"strings"
 	"text/template"
 
@@ -52,7 +53,7 @@ func NewAas() (Aas, error) {
 		return nil, err
 	}
 	tpl := template.Must(
-		template.New("base").Funcs(sprig.FuncMap()).ParseFiles(cfg.AasQuerySqlPath),
+		template.New(filepath.Base(cfg.AasQuerySqlPath)).Funcs(sprig.FuncMap()).ParseFiles(cfg.AasQuerySqlPath),
 	)
 
 	source := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=%s", cfg.AasDbHost, cfg.AasDbPort, cfg.AasDbUser, cfg.AasDbPassword, cfg.AasDbDatabase, cfg.AasDbSslMode)
