@@ -1,14 +1,14 @@
 submodels:
   - semanticID: "https://www.hsu-hh.de/aut/aas/nameplate"
     queryTemplates:
-      - path: "/app/config/query_digital_name.tpl.sql"
+      - path: "/app/configs/sm_nameplate/nameplate.tpl.sql"
         dbName: "submodel1"
-    responseTemplatePath: "/app/config/test/configs/sm_nameplate/response.tpl.json"
+    responseTemplatePath: "/app/configs/sm_nameplate/response.tpl.json"
   - semanticID: "https://www.hsu-hh.de/aut/aas/identification"
     queryTemplates:
-      - path: "/app/config/query_digital_identification.tpl.sql"
+      - path: "/app/configs/sm_identification/identity.tpl.sql"
         dbName: "submodel2"
-    responseTemplatePath: "/app/config/test/configs/sm_identification/response.tpl.json"
+    responseTemplatePath: "/app/configs/sm_identification/response.tpl.json"
 databases:
   - name: submodel1
     dbType: postgres

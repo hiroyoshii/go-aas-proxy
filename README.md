@@ -52,7 +52,7 @@ docker run hiroyoshii/go-aas-proxy:latest
 ```
 * demo (docker-compose and demo deta)
 ```
-./e2e/scenario_demo.sh
+./e2e/scenario_test.sh
 ```
 
 ## License

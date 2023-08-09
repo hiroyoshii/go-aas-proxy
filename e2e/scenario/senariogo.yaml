@@ -1,4 +1,0 @@
-schemaVersion: config/v1
-
-scenarios:
-- api.yaml

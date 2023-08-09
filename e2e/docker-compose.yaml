@@ -5,7 +5,8 @@ services:
   app:
     image: hiroyoshii/go-aas-proxy:develop
     volumes:
-      - ${PWD}e2e/applications/configs:/app/config
+      - ${PWD}/e2e/application/configs:/app/configs
+    # entrypoint: /bin/sh
     environment:
       HTTP_PORT: ":8081"
       AAS_DB_HOST: postgres_aas
@@ -14,9 +15,13 @@ services:
       AAS_DB_PASSWORD: password
       AAS_DB_DATABASE: aas
       SUBMODEL_CONFIG_PATH: /app/configs/submodel_config.yaml
-
+    ports:
+      - 8081:8081
   postgres_aas:
     image: postgres:latest
+    volumes:
+      - ${PWD}/scripts/aas_schema.sql:/app/aas_schema.sql
+      - ${PWD}/e2e/application/sql/aas:/app/sql
     restart: always
     environment:
       POSTGRES_USER: mebee
@@ -29,6 +34,8 @@ services:
 
   postgres_submodel1:
     image: postgres:latest
+    volumes:
+      - ${PWD}/e2e/application/sql/submodel1:/app/sql
     restart: always
     environment:
       POSTGRES_USER: mebee
@@ -41,6 +48,8 @@ services:
 
   postgres_submodel2:
     image: postgres:latest
+    volumes:
+      - ${PWD}/e2e/application/sql/submodel2:/app/sql
     restart: always
     environment:
       POSTGRES_USER: mebee
