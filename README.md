@@ -3,12 +3,14 @@
 <p>
 Asset Administration Shell(AAS) proxy for RDBMS backend
 </p>
-</div>
 
 [![Build](https://github.com/hiroyoshii/go-aas-proxy/actions/workflows/go_application.yaml/badge.svg)](https://github.com/hiroyoshii/go-aas-proxy/actions/workflows/go_application.yaml)
 [![CodeQL](https://github.com/hiroyoshii/go-aas-proxy/actions/workflows/codeql.yml/badge.svg)](https://github.com/hiroyoshii/go-aas-proxy/actions/workflows/codeql.yml)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/hiroyoshii/go-aas-proxy/badge)](https://securityscorecards.dev/viewer/?uri=github.com/hiroyoshii/go-aas-proxy)
 [![License](https://img.shields.io/github/license/hiroyoshii/go-aas-proxy)](LICENSE)
+
+</div>
+
 
 ## About
 
@@ -33,10 +35,10 @@ Unsuported:
 - :x: create/update/delete submodels and submodel elements
 - :x: Invocation Endpoints
 
-## Architecture
+## Implementation Overview
 ![architecture](./assets/architecture.drawio.png)
 - configurablity for aas
-  - query sql and stored tables (default: aas contents are stored by jsonb type)
+  - query sql and stored tables (default: aas contents are stored as json type in RDBMS)
 - configurablity for submodel
   - reference databases per semanticID of submodel
   - query for databases
