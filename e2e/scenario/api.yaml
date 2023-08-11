@@ -6,7 +6,7 @@ steps:
   protocol: http
   request:
     method: GET
-    url: "https://localhost:8081/shells/{{vars.aas_id}}"
+    url: "http://localhost:8081/shells/{{vars.aas_id}}"
   expect:
     code: OK
 - title: unknown aas
@@ -15,7 +15,7 @@ steps:
   protocol: http
   request:
     method: GET
-    url: "https://localhost:8081/shells/{{vars.aas_id}}"
+    url: "http://localhost:8081/shells/{{vars.aas_id}}"
   expect:
-    code: OK
+    code: NotFound
 
