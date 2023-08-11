@@ -1,4 +1,4 @@
-name: integration testing
+name: e2e testing
 on: [workflow_dispatch]
 jobs:
   build:
@@ -8,7 +8,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Run scenario test
-        run: ./e2e/scenario_test.sh
+        run: |
+          go install github.com/zoncoen/scenarigo/cmd/scenarigo@v0.14.2
+          ./e2e/scenario_test.sh
       - name: Run k6 local test
         uses: grafana/k6-action@v0.3.0
         with:
