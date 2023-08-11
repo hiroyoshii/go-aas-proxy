@@ -106,7 +106,7 @@ func (s Server) ShellRepoGetSubmodelsFromShell(ctx echo.Context, aasId string) e
 		log.Printf("failed to retrieved submodel semantic id: %v\n", err)
 		return err
 	}
-	res := []*basyxAas.Submodel{}
+	res := []map[string]interface{}{}
 	for id, semantic := range id2Semantic {
 		b, err := s.submodelCli.Get(aasId, semantic, id)
 		if err != nil {
@@ -116,7 +116,7 @@ func (s Server) ShellRepoGetSubmodelsFromShell(ctx echo.Context, aasId string) e
 		if len(b) == 0 {
 			return ctx.JSON(http.StatusNotFound, fmt.Sprintf("Submodel(idShort: %s) is not found", id))
 		}
-		var r *basyxAas.Submodel
+		var r map[string]interface{}
 		err = json.Unmarshal(b, &r)
 		if err != nil {
 			log.Printf("failed to unmarshal: %v\n", err)
@@ -150,7 +150,7 @@ func (s Server) GetShellsAasIdAasSubmodelsSubmodelIdShort(ctx echo.Context, aasI
 	if len(id2Semantic) != 1 {
 		return ctx.JSON(http.StatusNotFound, "No related submodel found")
 	}
-	var res *basyxAas.Submodel
+	var res map[string]interface{}
 	for _, semantic := range id2Semantic {
 		b, err := s.submodelCli.Get(aasId, semantic, submodelIdShort)
 		if err != nil {

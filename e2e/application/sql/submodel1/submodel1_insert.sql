@@ -5,5 +5,5 @@ INSERT INTO product VALUES
 ('454576463545648365874', 'smart.festo.com/demo/aas/1/1/454576463545648365874','', 'manufacturer1');
 
 INSERT INTO contact_info VALUES 
-('contact_info1', 'technikservice@festo.com', 'https://www.festo.com', '+49711347-3000', '"+49711 347-2190', 'manufacturer1');
+('contact_info1', 'technikservice@festo.com', 'https://www.festo.com', '+49711347-3000', '+49711 347-2190', 'manufacturer1');
 

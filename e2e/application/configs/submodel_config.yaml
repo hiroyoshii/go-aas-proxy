@@ -22,7 +22,7 @@ databases:
   - name: submodel2
     dbType: postgres
     dbConfig:
-      host: "postgres_submodel1"
+      host: "postgres_submodel2"
       port: 5432
       user: "mebee"
       password: "password"
