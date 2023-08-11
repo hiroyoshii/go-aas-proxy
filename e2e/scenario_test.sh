@@ -9,4 +9,4 @@ docker-compose -f e2e/docker-compose.yaml exec postgres_submodel1 psql -U mebee 
 docker-compose -f e2e/docker-compose.yaml exec postgres_submodel2 psql -U mebee submodel2 -f /app/sql/submodel2_ddl.sql
 docker-compose -f e2e/docker-compose.yaml exec postgres_submodel2 psql -U mebee submodel2 -f /app/sql/submodel2_insert.sql
 
-scenarigo run -c e2e/scenario/scenario.yaml
+scenarigo run -c e2e/scenario/scenariogo.yaml
