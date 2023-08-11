@@ -1,15 +1,12 @@
 title: get scenarigo repository
 steps:
-- title: GET https://api.github.com/repos/zoncoen/scenarigo
+- title: GET single aas
   vars:
-    user: zoncoen
-    repo: scenarigo
+    aas_id: 1
   protocol: http
   request:
     method: GET
-    url: "https://api.github.com/repos/{{vars.user}}/{{vars.repo}}"
+    url: "https://localhost:8081/shells/{{vars.aas_id}}"
   expect:
     code: OK
-    body:
-      name: "{{vars.repo}}"
 
