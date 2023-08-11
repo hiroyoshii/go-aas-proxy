@@ -14,7 +14,8 @@ jobs:
       - name: Run scenario test
         run: |
           go install github.com/zoncoen/scenarigo/cmd/scenarigo@v0.14.2
-          ./e2e/scenario_test.sh
+          ./e2e/scenario_setup.sh
+          scenarigo run -c e2e/scenario/scenariogo.yaml
       - name: Run k6 local test
         uses: grafana/k6-action@v0.3.0
         with:
