@@ -86,6 +86,10 @@ func NewSubmodel() (Submodel, error) {
 		dbs[c.Name] = db
 	}
 
+	return newSubmodelWithDb(t, dbs)
+}
+
+func newSubmodelWithDb(t submodelYaml, dbs map[string]*sql.DB) (Submodel, error) {
 	respTpl := map[string]*template.Template{}
 	qfileMap := map[string]map[string][]*template.Template{}
 	for _, s := range t.SubmodelConfigs {
@@ -105,7 +109,6 @@ func NewSubmodel() (Submodel, error) {
 		)
 		respTpl[s.SemanticID] = tpl
 	}
-
 	return &submodel{
 		dbs:               dbs,
 		respTpl:           respTpl,
