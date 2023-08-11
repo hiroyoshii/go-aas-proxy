@@ -1,5 +1,5 @@
 name: e2e testing
-on: [workflow_dispatch]
+on: [push]
 jobs:
   build:
     name: Run k6 test
