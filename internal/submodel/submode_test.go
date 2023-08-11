@@ -10,7 +10,8 @@ import (
 )
 
 func TestGetSubmodel(t *testing.T) {
-	os.Setenv("SUBMODEL_CONFIG_PATH", "submodel_config.yaml")
+	dir, _ := os.Getwd()
+	os.Setenv("SUBMODEL_CONFIG_PATH", dir+"submodel_config.yaml")
 
 	s, err := NewSubmodel()
 	assert.Nil(t, err)

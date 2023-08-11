@@ -18,11 +18,10 @@ jobs:
           curl http://localhost:8081/shells/smart.festo.com%2Fdemo%2Faas%2F1%2F1%2F454576463545648365874
           docker-compose -f e2e/docker-compose.yaml logs
           scenarigo run -c e2e/scenario/scenariogo.yaml
-      - name: Run k6 local test
-        uses: grafana/k6-action@v0.3.0
-        with:
-          filename: e2e/k6-load/local_test.js
-          flags: --vus 50 --duration 10s
+      - name: Install k6
+        run: |
+          curl https://github.com/loadimpact/k6/releases/download/v0.26.2/k6-v0.26.2-linux64.tar.gz -L | tar xvz --strip-components 1  
+          ./k6 e2e/k6-load/local_test.js
       - name: Archive load test results
         uses: actions/upload-artifact@v3
         with:
