@@ -2,7 +2,16 @@ title: get scenarigo repository
 steps:
 - title: GET single aas
   vars:
-    aas_id: 1
+    aas_id: "smart.festo.com%2Fdemo%2Faas%2F1%2F1%2F454576463545648365874"
+  protocol: http
+  request:
+    method: GET
+    url: "https://localhost:8081/shells/{{vars.aas_id}}"
+  expect:
+    code: OK
+- title: unknown aas
+  vars:
+    aas_id: "1"
   protocol: http
   request:
     method: GET
