@@ -16,6 +16,7 @@ jobs:
           go install github.com/zoncoen/scenarigo/cmd/scenarigo@v0.14.2
           ./e2e/scenario_setup.sh
           scenarigo run -c e2e/scenario/scenariogo.yaml
+          docker-compose -f e2e/docker-compose.yaml logs
       - name: Run k6 local test
         uses: grafana/k6-action@v0.3.0
         with:
