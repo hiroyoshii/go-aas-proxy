@@ -14,36 +14,30 @@ import (
 	_ "github.com/lib/pq"
 )
 
-var (
-	submodelSql = `
-select short_id, semantic_id from submodel_proxy
-join aas on aas.global_id = submodel_proxy.aas_id
-`
-)
-
 type Aas interface {
 	List() ([]byte, error)
 	Get(aasId string) ([]byte, error)
 	CreateOrUpdate(aasId string, jsonb []byte) ([]byte, error)
 	Delete(aasId string) error
-	GetSubmodelIds(aasId string, submodelIdShort string) (map[string]string, error)
+	GetSubmodelIds(aasId, submodelIdShort string) (map[string]string, error)
 	DeleteSubmodel(aasId, submodelIdShort string) error
 	CreateOrUpdateSubmodel(aasId, globalId, semanticId, submodelIdShort string) error
 }
 
 type aas struct {
-	db  *sql.DB
-	tpl *template.Template
+	db      *sql.DB
+	tpl     *template.Template
+	sRefTpl *template.Template
 }
 
 type config struct {
-	AasQuerySqlPath string `env:"AAS_QUERY_SQL_PATH" envDefault:"internal/aas/query_default.tpl.sql"`
-	AasDbHost       string `env:"AAS_DB_HOST" envDefault:"127.0.0.1"`
-	AasDbPort       int    `env:"AAS_DB_PORT" envDefault:"5432"`
-	AasDbUser       string `env:"AAS_DB_USER" envDefault:"postgres"`
-	AasDbPassword   string `env:"AAS_DB_PASSWORD" envDefault:"password"`
-	AasDbDatabase   string `env:"AAS_DB_DATABASE" envDefault:"sample"`
-	AasDbSslMode    string `env:"AAS_DB_SSL_MODE" envDefault:"disable"`
+	AasTablesCreated bool   `env:"AAS_TABLES_CREATED" envDefault:"false"`
+	AasDbHost        string `env:"AAS_DB_HOST" envDefault:"127.0.0.1"`
+	AasDbPort        int    `env:"AAS_DB_PORT" envDefault:"5432"`
+	AasDbUser        string `env:"AAS_DB_USER" envDefault:"postgres"`
+	AasDbPassword    string `env:"AAS_DB_PASSWORD" envDefault:"password"`
+	AasDbDatabase    string `env:"AAS_DB_DATABASE" envDefault:"sample"`
+	AasDbSslMode     string `env:"AAS_DB_SSL_MODE" envDefault:"disable"`
 }
 
 func NewAas() (Aas, error) {
@@ -52,18 +46,33 @@ func NewAas() (Aas, error) {
 		log.Printf("%+v\n", err)
 		return nil, err
 	}
-	tpl := template.Must(
-		template.New(filepath.Base(cfg.AasQuerySqlPath)).Funcs(sprig.FuncMap()).ParseFiles(cfg.AasQuerySqlPath),
-	)
-
 	source := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=%s", cfg.AasDbHost, cfg.AasDbPort, cfg.AasDbUser, cfg.AasDbPassword, cfg.AasDbDatabase, cfg.AasDbSslMode)
 	db, err := sql.Open("postgres", source)
 	if err != nil {
 		return nil, err
 	}
+	if cfg.AasTablesCreated {
+		_, err := db.Exec(aasInitSql)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	return newAasWithDB(db)
+}
+
+func newAasWithDB(db *sql.DB) (Aas, error) {
+	tpl := template.Must(
+		template.New(filepath.Base("aasSql")).Funcs(sprig.FuncMap()).Parse(aasSql),
+	)
+	sRefTpl := template.Must(
+		template.New(filepath.Base("submodelRefSql")).Funcs(sprig.FuncMap()).Parse(submodelRefSql),
+	)
+
 	return &aas{
-		db:  db,
-		tpl: tpl,
+		db:      db,
+		tpl:     tpl,
+		sRefTpl: sRefTpl,
 	}, nil
 }
 
@@ -139,10 +148,14 @@ func (a *aas) Delete(aasId string) error {
 }
 
 func (a *aas) GetSubmodel(aasId, submodelIdShort string) (string, error) {
-	rows, err := a.db.Query(
-		fmt.Sprintf(submodelSql+" where aas.global_id = '%s' and submodel_proxy.short_id = '%s'",
-			"semantic_id", aasId, submodelIdShort),
-	)
+	writer := new(strings.Builder)
+	err := a.sRefTpl.Execute(writer, map[string]interface{}{"AasID": aasId, "SubmodelIDShort": submodelIdShort})
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	rows, err := a.db.Query(writer.String())
+
 	if err != nil {
 		return "", err
 	}
@@ -180,11 +193,17 @@ func (a *aas) CreateOrUpdateSubmodel(aasId, globalId, semanticId, submodelIdShor
 	return nil
 }
 func (a *aas) GetSubmodelIds(aasId string, submodelIdShort string) (map[string]string, error) {
-	where := fmt.Sprintf(" where aas.global_id = '%s'", aasId)
-	if submodelIdShort != "" {
-		where += fmt.Sprintf(" and short_id = '%s'", submodelIdShort)
+	writer := new(strings.Builder)
+	err := a.sRefTpl.Execute(writer, map[string]interface{}{
+		"AasID":           aasId,
+		"SubmodelIDShort": submodelIdShort,
+	})
+	if err != nil {
+		return nil, err
 	}
-	rows, err := a.db.Query(fmt.Sprintf(submodelSql + where))
+
+	rows, err := a.db.Query(writer.String())
+
 	if err != nil {
 		return nil, err
 	}
