@@ -15,7 +15,7 @@ databases:
     dbConfig:
       host: "localhost"
       port: 5433
-      user: "mebee"
+      user: "postgres"
       password: "password"
       database: "submodel1"
       sslmode: "disable"
@@ -24,7 +24,7 @@ databases:
     dbConfig:
       host: "localhost"
       port: 5434
-      user: "mebee"
+      user: "postgres"
       password: "password"
       database: "submodel2"
       sslmode: "disable"

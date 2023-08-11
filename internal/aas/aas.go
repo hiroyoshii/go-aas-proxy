@@ -40,7 +40,7 @@ type config struct {
 	AasQuerySqlPath string `env:"AAS_QUERY_SQL_PATH" envDefault:"internal/aas/query_default.tpl.sql"`
 	AasDbHost       string `env:"AAS_DB_HOST" envDefault:"127.0.0.1"`
 	AasDbPort       int    `env:"AAS_DB_PORT" envDefault:"5432"`
-	AasDbUser       string `env:"AAS_DB_USER" envDefault:"mebee"`
+	AasDbUser       string `env:"AAS_DB_USER" envDefault:"postgres"`
 	AasDbPassword   string `env:"AAS_DB_PASSWORD" envDefault:"password"`
 	AasDbDatabase   string `env:"AAS_DB_DATABASE" envDefault:"sample"`
 	AasDbSslMode    string `env:"AAS_DB_SSL_MODE" envDefault:"disable"`
