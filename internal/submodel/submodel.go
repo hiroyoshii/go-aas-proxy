@@ -142,6 +142,7 @@ func (a *submodel) Get(aasId, semanticID, submodelIdShort string) ([]byte, error
 			}
 		}
 	}
+	log.Printf("response funcMap: %v\n", respMap)
 	writer := new(strings.Builder)
 	err := a.respTpl[semanticID].Execute(writer, respMap)
 	if err != nil {

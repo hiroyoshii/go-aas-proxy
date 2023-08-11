@@ -17,3 +17,8 @@
 # perf
 - [ ] perf testing by k6.io
   - [ ] https://k6.io/blog/getting-started-with-performance-testing-in-ci-cd-using-k6/
+
+# others
+- [ ] e2e testing
+- [ ] goroutine parallel
+- [ ] mysql support

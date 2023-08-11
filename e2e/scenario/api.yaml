@@ -8,7 +8,7 @@ steps:
     method: GET
     url: "http://localhost:8081/shells/{{vars.aas_id}}"
   expect:
-    code: OK
+    code: 200
 - title: unknown aas
   vars:
     aas_id: "1"
@@ -17,5 +17,5 @@ steps:
     method: GET
     url: "http://localhost:8081/shells/{{vars.aas_id}}"
   expect:
-    code: NotFound
+    code: 404
 
