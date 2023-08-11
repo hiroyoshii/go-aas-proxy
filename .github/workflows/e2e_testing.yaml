@@ -22,7 +22,9 @@ jobs:
         run: |
           curl https://github.com/grafana/k6/releases/download/v0.45.1/k6-v0.45.1-linux-amd64.tar.gz -L | tar xvz --strip-components 1  
       - name: Run load test
-        run: ./k6 run e2e/k6-load/local_test.js
+        run: |
+          mkdir -p output
+          ./k6 run e2e/k6-load/local_test.js
       - name: Archive load test results
         uses: actions/upload-artifact@v3
         with:
