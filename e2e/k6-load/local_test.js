@@ -4,7 +4,7 @@ import {htmlReport} from "https://raw.githubusercontent.com/benc-uk/k6-reporter/
 import {jUnit, textSummary} from "https://jslib.k6.io/k6-summary/0.0.1/index.js";
 
 export const options = {
-  duration: '1m',
+  duration: '10s',
   vus: 50,
   thresholds: {
     http_req_failed: ['rate<0.01'], // http errors should be less than 1%
