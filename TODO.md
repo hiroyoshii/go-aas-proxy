@@ -25,3 +25,5 @@
 - [ ] execute aas ddl if not exist
 - [ ] refactor ci trigger
 - [ ] bot mr automatically merge
+- [ ] support other endpoints
+- [ ] release
