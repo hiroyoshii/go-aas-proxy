@@ -15,7 +15,7 @@ databases:
     dbConfig:
       host: "postgres_submodel1"
       port: 5432
-      user: "mebee"
+      user: "postgres"
       password: "password"
       database: "submodel1"
       sslmode: "disable"
@@ -24,7 +24,7 @@ databases:
     dbConfig:
       host: "postgres_submodel2"
       port: 5432
-      user: "mebee"
+      user: "postgres"
       password: "password"
       database: "submodel2"
       sslmode: "disable"

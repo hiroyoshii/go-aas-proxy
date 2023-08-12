@@ -1,19 +1,10 @@
 
-# Pipeline
-- [ ] testing
-  - [ ] unit testing
-  - [ ] perf testing by k6.io
-    - [ ] https://k6.io/blog/getting-started-with-performance-testing-in-ci-cd-using-k6/
-- [ ] badge
-  - [ ] security badge: https://github.com/ossf/scorecard
-
-# scenario
-- [ ] senario testing
-  - [ ] https://github.com/zoncoen/scenarigo
-- [ ] e2e docker compose
-- [ ] e2e perf testing
-- [ ] add readme about env, cfg
-- [ ] execute aas ddl if not exist
-# perf
-- [ ] perf testing by k6.io
-  - [ ] https://k6.io/blog/getting-started-with-performance-testing-in-ci-cd-using-k6/
+# tasks
+- [x] e2e testing
+- [x] mysql support
+- [x] execute aas ddl if not exist
+- [x] refactor ci trigger
+- [ ] support other endpoints: values
+- [ ] goroutine parallel
+- [ ] add readme about env, cfg. for contributor
+- [ ] release

@@ -15,7 +15,7 @@ func FuzzCall(f *testing.F) {
 		fmt.Println(orig)
 
 		if orig == "" {
-			t.Errorf("Before: %q, after: %q", orig)
+			t.Errorf("Before: %q", orig)
 		}
 	})
 }

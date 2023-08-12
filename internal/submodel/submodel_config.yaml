@@ -1,0 +1,16 @@
+submodels:
+  - semanticID: "https://www.hsu-hh.de/aut/aas/identification"
+    queryTemplates:
+      - path: "identity.tpl.sql"
+        dbName: "submodel1"
+    responseTemplatePath: "response.tpl.json"
+databases:
+  - name: submodel1
+    dbType: postgres
+    dbConfig:
+      host: "localhost"
+      port: 5433
+      user: "postgres"
+      password: "password"
+      database: "submodel1"
+      sslmode: "disable"

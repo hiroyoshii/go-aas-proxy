@@ -12,7 +12,7 @@ databases:
     dbConfig:
       host: "localhost"
       port: 5432
-      user: "mebee"
+      user: "postgres"
       password: "password"
       database: "postgres"
       sslmode: "disable"

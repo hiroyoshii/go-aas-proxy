@@ -11,7 +11,7 @@ services:
     image: postgres:latest
     restart: always
     environment:
-      POSTGRES_USER: mebee
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       PGPASSWORD: password123
       POSTGRES_DB: sample
@@ -27,7 +27,7 @@ services:
     ports:
       - 81:80
     environment:
-      PGADMIN_DEFAULT_EMAIL: info@mebee.info
+      PGADMIN_DEFAULT_EMAIL: info@postgres.info
       PGADMIN_DEFAULT_PASSWORD: password
     volumes:
       - pgadmin:/var/lib/pgadmin
