@@ -2,8 +2,9 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"hiroyoshii/go-aas-proxy/internal/server"
-	"log"
+	"log/slog"
 	"net/http"
 	"os"
 	"os/signal"
@@ -32,7 +33,7 @@ func main() {
 		panic(err)
 	}
 	go func() {
-		log.Println("starting server")
+		slog.Info("starting server")
 		if cfg.TLSEnabled {
 			if err := server.StartAutoTLS(cfg.Port); err != http.ErrServerClosed {
 				panic(err)
@@ -48,7 +49,7 @@ func main() {
 	signal.Notify(signals, syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP)
 
 	s := <-signals
-	log.Printf("terminated by %s signal\n", s.String())
+	slog.Debug(fmt.Sprintf("terminated by %s signal", s.String()))
 	if err := server.Shutdown(ctx); err != nil {
 		panic(err)
 	}

@@ -3,7 +3,7 @@ package aas
 import (
 	"database/sql"
 	"fmt"
-	"log"
+	"log/slog"
 	"path/filepath"
 	"strings"
 	"text/template"
@@ -43,7 +43,7 @@ type config struct {
 func NewAas() (Aas, error) {
 	cfg := &config{}
 	if err := env.Parse(cfg); err != nil {
-		log.Printf("%+v\n", err)
+		slog.Error(fmt.Sprintf("%+v\n", err))
 		return nil, err
 	}
 	source := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=%s", cfg.AasDbHost, cfg.AasDbPort, cfg.AasDbUser, cfg.AasDbPassword, cfg.AasDbDatabase, cfg.AasDbSslMode)
@@ -80,7 +80,7 @@ func (a *aas) List() ([]byte, error) {
 	writer := new(strings.Builder)
 	err := a.tpl.Execute(writer, nil)
 	if err != nil {
-		log.Fatalln(err)
+		slog.Error(err.Error())
 	}
 
 	rows, err := a.db.Query(writer.String())
@@ -105,7 +105,7 @@ func (a *aas) Get(aasId string) ([]byte, error) {
 	writer := new(strings.Builder)
 	err := a.tpl.Execute(writer, map[string]interface{}{"AasID": aasId})
 	if err != nil {
-		log.Fatalln(err)
+		slog.Error(err.Error())
 	}
 
 	rows, err := a.db.Query(writer.String())
@@ -151,7 +151,7 @@ func (a *aas) GetSubmodel(aasId, submodelIdShort string) (string, error) {
 	writer := new(strings.Builder)
 	err := a.sRefTpl.Execute(writer, map[string]interface{}{"AasID": aasId, "SubmodelIDShort": submodelIdShort})
 	if err != nil {
-		log.Fatalln(err)
+		slog.Error(err.Error())
 	}
 
 	rows, err := a.db.Query(writer.String())

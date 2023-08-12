@@ -10,10 +10,10 @@ FROM
 JOIN aas ON aas.global_id = submodel_proxy.aas_id
 WHERE
  true
- {{- if ne .AasID "" } }}
+ {{- if ne .AasID "" }}
  AND aas.global_id = '{{ .AasID }}'
  {{- end }}
- {{- if ne .SubmodelIDShort "" } }}
+ {{- if ne .SubmodelIDShort "" }}
  AND submodel_proxy.short_id = '{{ .SubmodelIDShort }}'
  {{- end }}
 ;
