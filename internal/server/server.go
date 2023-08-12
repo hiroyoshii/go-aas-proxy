@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
+	"log/slog"
 	"net/http"
 
 	basyxAas "hiroyoshii/go-aas-proxy/gen/go"
@@ -25,13 +25,13 @@ type Server struct {
 func (s Server) GetAllAssetAdministrationShells(ctx echo.Context) error {
 	b, err := s.aasCli.List()
 	if err != nil {
-		log.Printf("failed to retrieved aas list: %v\n", err)
+		slog.Error("failed to retrieved aas list: %v\n", err)
 		return err
 	}
 	var res []*basyxAas.AssetAdministrationShell
 	err = json.Unmarshal(b, &res)
 	if err != nil {
-		log.Printf("failed to unmarshal: %v\n", err)
+		slog.Error("failed to unmarshal: %v\n", err)
 		return err
 	}
 	return ctx.JSON(http.StatusOK, res)
@@ -54,7 +54,7 @@ func (s Server) GetShellsAasId(ctx echo.Context, aasId string) error {
 	ctx.Logger().Info(ctx.Path())
 	b, err := s.aasCli.Get(aasId)
 	if err != nil {
-		log.Printf("failed to retrieved aas: %v\n", err)
+		slog.Error("failed to retrieved aas: %v\n", err)
 		return err
 	}
 	if len(b) == 0 {
@@ -63,7 +63,7 @@ func (s Server) GetShellsAasId(ctx echo.Context, aasId string) error {
 	var res *basyxAas.AssetAdministrationShell
 	err = json.Unmarshal(b, &res)
 	if err != nil {
-		log.Printf("failed to unmarshal: %v\n", err)
+		slog.Error("failed to unmarshal: %v\n", err)
 		return err
 	}
 	return ctx.JSON(http.StatusOK, res)
@@ -103,14 +103,14 @@ func (s Server) GetAssetAdministrationShellById(ctx echo.Context, aasId string) 
 func (s Server) ShellRepoGetSubmodelsFromShell(ctx echo.Context, aasId string) error {
 	id2Semantic, err := s.aasCli.GetSubmodelIds(aasId, "")
 	if err != nil {
-		log.Printf("failed to retrieved submodel semantic id: %v\n", err)
+		slog.Error("failed to retrieved submodel semantic id: %v\n", err)
 		return err
 	}
 	res := []map[string]interface{}{}
 	for id, semantic := range id2Semantic {
 		b, err := s.submodelCli.Get(aasId, semantic, id)
 		if err != nil {
-			log.Printf("failed to retrieved submodel: %v\n", err)
+			slog.Error("failed to retrieved submodel: %v\n", err)
 			return err
 		}
 		if len(b) == 0 {
@@ -119,7 +119,7 @@ func (s Server) ShellRepoGetSubmodelsFromShell(ctx echo.Context, aasId string) e
 		var r map[string]interface{}
 		err = json.Unmarshal(b, &r)
 		if err != nil {
-			log.Printf("failed to unmarshal: %v\n", err)
+			slog.Error("failed to unmarshal: %v\n", err)
 			return err
 		}
 		res = append(res, r)
@@ -132,7 +132,7 @@ func (s Server) ShellRepoGetSubmodelsFromShell(ctx echo.Context, aasId string) e
 func (s Server) ShellRepoDeleteSubmodelFromShellByIdShort(ctx echo.Context, aasId string, submodelIdShort string) error {
 	err := s.aasCli.DeleteSubmodel(aasId, submodelIdShort)
 	if err != nil {
-		log.Printf("failed to retrieved submodel semantic id: %v\n", err)
+		slog.Error("failed to retrieved submodel semantic id: %v\n", err)
 		return err
 	}
 	b := true
@@ -142,31 +142,39 @@ func (s Server) ShellRepoDeleteSubmodelFromShellByIdShort(ctx echo.Context, aasI
 // Retrieves the Submodel from the Asset Administration Shell
 // (GET /shells/{aasId}/aas/submodels/{submodelIdShort})
 func (s Server) GetShellsAasIdAasSubmodelsSubmodelIdShort(ctx echo.Context, aasId string, submodelIdShort string) error {
+	res, err := s.getSubmodel(aasId, submodelIdShort)
+	if err != nil {
+		return ctx.JSON(err.(*HttpError).Status, err.Error())
+	}
+	return ctx.JSON(http.StatusOK, res)
+}
+
+func (s Server) getSubmodel(aasId string, submodelIdShort string) (map[string]interface{}, error) {
 	id2Semantic, err := s.aasCli.GetSubmodelIds(aasId, submodelIdShort)
 	if err != nil {
-		log.Printf("failed to retrieved submodel semantic id: %v\n", err)
-		return err
+		slog.Error("failed to retrieved submodel semantic id: %v\n", err)
+		return nil, &HttpError{Status: http.StatusInternalServerError, Err: err}
 	}
 	if len(id2Semantic) != 1 {
-		return ctx.JSON(http.StatusNotFound, "No related submodel found")
+		return nil, &HttpError{Status: http.StatusNotFound, Err: fmt.Errorf("No related submodel found")}
 	}
 	var res map[string]interface{}
 	for _, semantic := range id2Semantic {
 		b, err := s.submodelCli.Get(aasId, semantic, submodelIdShort)
 		if err != nil {
-			log.Printf("failed to retrieved submodel: %v\n", err)
-			return err
+			slog.Error("failed to retrieved submodel: %v\n", err)
+			return nil, &HttpError{Status: http.StatusInternalServerError, Err: err}
 		}
 		if len(b) == 0 {
-			return ctx.JSON(http.StatusNotFound, "No Submodel found")
+			return nil, &HttpError{Status: http.StatusNotFound, Err: fmt.Errorf("No Submodel found")}
 		}
 		err = json.Unmarshal(b, &res)
 		if err != nil {
-			log.Printf("failed to unmarshal: %v\n", err)
-			return err
+			slog.Error("failed to unmarshal: %v\n", err)
+			return nil, &HttpError{Status: http.StatusInternalServerError, Err: err}
 		}
 	}
-	return ctx.JSON(http.StatusOK, res)
+	return res, err
 }
 
 // Creates or updates a Submodel to an existing Asset Administration Shell
@@ -193,7 +201,7 @@ func (s Server) ShellRepoPutSubmodelToShell(ctx echo.Context, aasId string, subm
 	}
 	sb, err := s.submodelCli.Get(aasId, semanticId, submodelIdShort)
 	if err != nil {
-		log.Printf("failed to retrieved submodel: %v\n", err)
+		slog.Error("failed to retrieved submodel: %v\n", err)
 		return err
 	}
 	if len(sb) == 0 {
@@ -215,13 +223,39 @@ func (s Server) ShellRepoGetSubmodelFromShellByIdShort(ctx echo.Context, aasId s
 // Retrieves the minimized version of a Submodel, i.e. only the values of SubmodelElements are serialized and returned
 // (GET /shells/{aasId}/aas/submodels/{submodelIdShort}/submodel/values)
 func (s Server) ShellRepoGetSubmodelValues(ctx echo.Context, aasId string, submodelIdShort string) error {
-	return ctx.JSON(http.StatusOK, &basyxAas.Submodel{})
+	res, err := s.getSubmodel(aasId, submodelIdShort)
+	if err != nil {
+		return ctx.JSON(err.(*HttpError).Status, err.Error())
+	}
+	result := map[string]interface{}{}
+	for _, ses := range res["submodelElements"].([]interface{}) {
+		e := ses.(map[string]interface{})
+		recursive(e["idShort"].(string), e["value"], result)
+	}
+	return ctx.JSON(http.StatusOK, result)
+}
+
+func recursive(key string, value interface{}, result map[string]interface{}) {
+	if arr, ok := value.([]interface{}); ok {
+		r := map[string]interface{}{}
+		for _, a := range arr {
+			v := a.(map[string]interface{})
+			recursive(v["idShort"].(string), v["value"], r)
+		}
+		result[key] = r
+	} else {
+		result[key] = value
+	}
 }
 
 // Retrieves all Submodel-Elements from the Submodel
 // (GET /shells/{aasId}/aas/submodels/{submodelIdShort}/submodel/submodelElements)
 func (s Server) ShellRepoGetSubmodelElements(ctx echo.Context, aasId string, submodelIdShort string) error {
-	return ctx.JSON(http.StatusOK, &basyxAas.SubmodelElement{})
+	res, err := s.getSubmodel(aasId, submodelIdShort)
+	if err != nil {
+		return ctx.JSON(err.(*HttpError).Status, err.Error())
+	}
+	return ctx.JSON(http.StatusOK, res["submodelElements"])
 }
 
 // Retrieves the result of an asynchronously started operation
@@ -245,7 +279,7 @@ func (s Server) ShellRepoDeleteSubmodelElementByIdShort(ctx echo.Context, aasId 
 // Retrieves a specific Submodel-Element from the Submodel
 // (GET /shells/{aasId}/aas/submodels/{submodelIdShort}/submodel/submodelElements/{seIdShortPath})
 func (s Server) ShellRepoGetSubmodelElementByIdShort(ctx echo.Context, aasId string, submodelIdShort string, seIdShortPath string) error {
-	return ctx.JSON(http.StatusOK, &basyxAas.SubmodelElement{})
+	return ctx.JSON(http.StatusNotFound, nil)
 }
 
 // Creates or updates a Submodel-Element at the Submodel
@@ -257,7 +291,7 @@ func (s Server) ShellRepoPutSubmodelElement(ctx echo.Context, aasId string, subm
 // Retrieves the value of a specific Submodel-Element from the Submodel
 // (GET /shells/{aasId}/aas/submodels/{submodelIdShort}/submodel/submodelElements/{seIdShortPath}/value)
 func (s Server) ShellRepoGetSubmodelElementValueByIdShort(ctx echo.Context, aasId string, submodelIdShort string, seIdShortPath string) error {
-	return ctx.JSON(http.StatusOK, &basyxAas.SubmodelElement{})
+	return ctx.JSON(http.StatusNotFound, nil)
 }
 
 // Updates the Submodel-Element's value

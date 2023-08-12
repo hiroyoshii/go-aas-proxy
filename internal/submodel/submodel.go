@@ -2,12 +2,14 @@ package submodel
 
 import (
 	"database/sql"
+	"errors"
 	"fmt"
 	"hiroyoshii/go-aas-proxy/internal/sqlutility"
-	"log"
+	"log/slog"
 	"os"
 	"path/filepath"
 	"strings"
+	"sync"
 	"text/template"
 
 	"github.com/iancoleman/strcase"
@@ -61,20 +63,20 @@ type submodelYaml struct {
 func NewSubmodel() (Submodel, error) {
 	cfg := &config{}
 	if err := env.Parse(cfg); err != nil {
-		log.Printf("%+v\n", err)
+		slog.Error("%+v\n", err)
 		return nil, err
 	}
 
 	ym, err := os.ReadFile(cfg.SubmodelConfigPath)
 	if err != nil {
-		log.Fatalf("error: %v", err)
+		slog.Error("error: %v", err)
 		return nil, err
 	}
 	t := submodelYaml{}
 
 	err = yaml.Unmarshal([]byte(ym), &t)
 	if err != nil {
-		log.Fatalf("error: %v", err)
+		slog.Error("error: %v", err)
 		return nil, err
 	}
 
@@ -134,35 +136,62 @@ func (a *submodel) Get(aasId, semanticID, submodelIdShort string) ([]byte, error
 		return []byte{}, nil
 	}
 
-	respMap := map[string]interface{}{}
+	respErr := sync.Map{}
+	respMap := sync.Map{}
+	wg := &sync.WaitGroup{}
 	for k, v := range a.queryDbTplNameMap[semanticID] {
 		for _, file := range v {
-			writer := new(strings.Builder)
-			err := file.Execute(writer, map[string]interface{}{"AasID": aasId, "SubmodelIdShort": submodelIdShort})
-			if err != nil {
-				log.Fatalln(err)
-				return nil, err
-			}
-			rows, err := a.dbs[k].Query(writer.String())
-			if err != nil {
-				return nil, err
-			}
-			defer rows.Close()
-			m, mm, err := sqlutility.RowsToMap(rows)
-			if err != nil {
-				return nil, err
-			}
-			respMap[fileNameToCamel(file.Name())] = map[string]interface{}{
-				"Results": m,
-				"Columns": mm,
-			}
+			wg.Add(1)
+			go func(file *template.Template) {
+				key := fileNameToCamel(file.Name())
+				defer wg.Done()
+				writer := new(strings.Builder)
+				err := file.Execute(writer, map[string]interface{}{"AasID": aasId, "SubmodelIdShort": submodelIdShort})
+				if err != nil {
+					slog.Error(err.Error())
+					respErr.Store(key, err)
+					return
+				}
+				rows, err := a.dbs[k].Query(writer.String())
+				if err != nil {
+					slog.Error(err.Error())
+					respErr.Store(key, err)
+					return
+				}
+				defer rows.Close()
+				m, mm, err := sqlutility.RowsToMap(rows)
+				if err != nil {
+					slog.Error(err.Error())
+					respErr.Store(key, err)
+					return
+				}
+				respMap.Store(key, map[string]interface{}{
+					"Results": m,
+					"Columns": mm,
+				},
+				)
+			}(file)
 		}
 	}
-	log.Printf("response funcMap: %v\n", respMap)
+	wg.Wait()
+	errs := []error{}
+	respErr.Range(func(key interface{}, value interface{}) bool {
+		errs = append(errs, value.(error))
+		return true
+	})
+	if len(errs) > 0 {
+		return nil, errors.Join(errs...)
+	}
+	m := map[string]interface{}{}
+	respMap.Range(func(key interface{}, value interface{}) bool {
+		m[key.(string)] = value
+		return true
+	})
+	slog.Debug("response funcMap: %v\n", m)
 	writer := new(strings.Builder)
-	err := a.respTpl[semanticID].Execute(writer, respMap)
+	err := a.respTpl[semanticID].Execute(writer, m)
 	if err != nil {
-		log.Fatalln(err)
+		slog.Error(err.Error())
 		return nil, err
 	}
 
