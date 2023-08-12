@@ -1,7 +1,6 @@
 name: longrun testing
 on:
   push:
-    branches: [ main ]
   workflow_dispatch:
     
 jobs:
@@ -11,6 +10,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Set up
+        run: ./e2e/scenario_setup.sh
       - name: Install k6
         run: |
           curl https://github.com/grafana/k6/releases/download/v0.45.1/k6-v0.45.1-linux-amd64.tar.gz -L | tar xvz --strip-components 1  
