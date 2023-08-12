@@ -1,6 +1,7 @@
 name: longrun testing
 on:
   push:
+    branches: [ main ]
   workflow_dispatch:
     
 jobs:
