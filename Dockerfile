@@ -2,8 +2,12 @@ FROM golang:1.21 AS build-env
 
 ENV CGO_ENABLED=0 GOOS=linux GOARCH=amd64
 
-ADD . /go/src/aas-proxy
 WORKDIR /go/src/aas-proxy
+Add go.mod .
+Add go.sum .
+RUN  go mod download
+
+ADD . /go/src/aas-proxy
 
 RUN go build -o /bin/aas-proxy cmd/main.go
 
