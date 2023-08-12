@@ -9,4 +9,5 @@ docker compose -f e2e/docker-compose.yaml exec -T postgres_submodel1 psql -U pos
 docker compose -f e2e/docker-compose.yaml exec -T postgres_submodel2 psql -U postgres submodel2 -f /app/sql/submodel2_ddl.sql
 docker compose -f e2e/docker-compose.yaml exec -T postgres_submodel2 psql -U postgres submodel2 -f /app/sql/submodel2_insert.sql
 
+docker compose -f e2e/docker-compose.yaml logs
 docker compose -f e2e/docker-compose.yaml ps
