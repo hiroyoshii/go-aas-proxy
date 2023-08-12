@@ -43,7 +43,7 @@ type config struct {
 func NewAas() (Aas, error) {
 	cfg := &config{}
 	if err := env.Parse(cfg); err != nil {
-		slog.Error("%+v\n", err)
+		slog.Error(fmt.Sprintf("%+v\n", err))
 		return nil, err
 	}
 	source := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=%s", cfg.AasDbHost, cfg.AasDbPort, cfg.AasDbUser, cfg.AasDbPassword, cfg.AasDbDatabase, cfg.AasDbSslMode)

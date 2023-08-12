@@ -63,20 +63,20 @@ type submodelYaml struct {
 func NewSubmodel() (Submodel, error) {
 	cfg := &config{}
 	if err := env.Parse(cfg); err != nil {
-		slog.Error("%+v\n", err)
+		slog.Error(err.Error())
 		return nil, err
 	}
 
 	ym, err := os.ReadFile(cfg.SubmodelConfigPath)
 	if err != nil {
-		slog.Error("error: %v", err)
+		slog.Error(err.Error())
 		return nil, err
 	}
 	t := submodelYaml{}
 
 	err = yaml.Unmarshal([]byte(ym), &t)
 	if err != nil {
-		slog.Error("error: %v", err)
+		slog.Error(err.Error())
 		return nil, err
 	}
 
@@ -187,7 +187,7 @@ func (a *submodel) Get(aasId, semanticID, submodelIdShort string) ([]byte, error
 		m[key.(string)] = value
 		return true
 	})
-	slog.Debug("response funcMap: %v\n", m)
+	slog.Debug(fmt.Sprintf("response funcMap: %v", m))
 	writer := new(strings.Builder)
 	err := a.respTpl[semanticID].Execute(writer, m)
 	if err != nil {
