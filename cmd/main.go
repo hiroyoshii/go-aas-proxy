@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"hiroyoshii/go-aas-proxy/internal/server"
 	"log/slog"
 	"net/http"
@@ -48,7 +49,7 @@ func main() {
 	signal.Notify(signals, syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP)
 
 	s := <-signals
-	slog.Info("terminated by %s signal\n", s.String())
+	slog.Debug(fmt.Sprintf("terminated by %s signal", s.String()))
 	if err := server.Shutdown(ctx); err != nil {
 		panic(err)
 	}
