@@ -33,7 +33,7 @@ type submodel struct {
 }
 
 type config struct {
-	SubmodelConfigPath string `env:"SUBMODEL_CONFIG_PATH" envDefault:"internal/submodel/submodel_config.yaml"`
+	SubmodelConfigPath string `env:"SUBMODEL_CONFIG_PATH,required"`
 }
 
 type submodelYaml struct {

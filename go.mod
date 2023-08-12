@@ -66,7 +66,6 @@ require (
 	github.com/mitchellh/copystructure v1.0.0 // indirect
 	github.com/mitchellh/reflectwalk v1.0.0 // indirect
 	github.com/shopspring/decimal v1.2.0 // indirect
-	github.com/sijms/go-ora v1.3.2
 	github.com/sijms/go-ora/v2 v2.7.11
 	github.com/spf13/cast v1.3.1 // indirect
 	golang.org/x/crypto v0.11.0 // indirect
