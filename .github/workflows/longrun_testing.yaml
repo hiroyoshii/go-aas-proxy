@@ -1,33 +1,23 @@
-name: e2e testing
+name: longrun testing
 on:
   push:
+    branches: [ main ]
   workflow_dispatch:
     
 jobs:
-  e2e-test:
+  k6-test:
     name: Run scenarigo and k6 test
     runs-on: ubuntu-latest
     steps:
-      - name: set up go
-        uses: actions/setup-go@v4
-        with:
-          go-version: ">=1.17"
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Run scenario test
-        run: |
-          go install github.com/zoncoen/scenarigo/cmd/scenarigo@v0.14.2
-          ./e2e/scenario_setup.sh
-          curl http://localhost:8081/shells/smart.festo.com%2Fdemo%2Faas%2F1%2F1%2F454576463545648365874
-          docker-compose -f e2e/docker-compose.yaml logs
-          scenarigo run -c e2e/scenario/scenariogo.yaml
       - name: Install k6
         run: |
           curl https://github.com/grafana/k6/releases/download/v0.45.1/k6-v0.45.1-linux-amd64.tar.gz -L | tar xvz --strip-components 1  
       - name: Run load test
         run: |
           mkdir -p output
-          ./k6 run e2e/k6-load/local_test.js
+          ./k6 run e2e/k6-load/local_long_test.js
       - name: Archive load test results
         uses: actions/upload-artifact@v3
         with:
