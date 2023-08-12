@@ -14,7 +14,9 @@ import (
 
 	"github.com/Masterminds/sprig/v3"
 	"github.com/caarlos0/env"
+	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/lib/pq"
+	_ "github.com/sijms/go-ora/v2"
 	"gopkg.in/yaml.v3"
 )
 
@@ -43,6 +45,7 @@ type submodelYaml struct {
 	} `yaml:"submodels"`
 	DatabaseConfigs []struct {
 		Name     string `yaml:"name"`
+		DbType   string `yaml:"dbType"`
 		DbConfig struct {
 			Host     string `yaml:"host"`
 			Port     int    `yaml:"port"`
@@ -50,6 +53,7 @@ type submodelYaml struct {
 			Password string `yaml:"password"`
 			Database string `yaml:"database"`
 			Sslmode  string `yaml:"sslmode"`
+			Options  string `yaml:"options"`
 		} `yaml:"dbConfig"`
 	} `yaml:"databases"`
 }
@@ -77,9 +81,18 @@ func NewSubmodel() (Submodel, error) {
 	dbs := map[string]*sql.DB{}
 	for _, c := range t.DatabaseConfigs {
 		d := c.DbConfig
-		source := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=%s",
-			d.Host, d.Port, d.User, d.Password, d.Database, d.Sslmode)
-		db, err := sql.Open("postgres", source)
+		source := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s",
+			d.Host, d.Port, d.User, d.Password, d.Database)
+		switch c.DbType {
+		case "mysql":
+			source = fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?%s", d.User, d.Password, d.Host, d.Port, d.Database, d.Options)
+		case "oracle":
+			source = fmt.Sprintf("oracle://%s:%s@%s:%d/%s?%s", d.User, d.Password, d.Host, d.Port, d.Database, d.Options)
+
+		case "postgres":
+			source = fmt.Sprintf("%s sslmode=%s", source, d.Sslmode)
+		}
+		db, err := sql.Open(c.DbType, source)
 		if err != nil {
 			return nil, err
 		}

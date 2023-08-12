@@ -1,11 +1,10 @@
 
 # tasks
 - [x] e2e testing
+- [x] mysql support
+- [x] execute aas ddl if not exist
+- [x] refactor ci trigger
+- [ ] support other endpoints: values
 - [ ] goroutine parallel
-- [ ] mysql support
-- [ ] execute aas ddl if not exist
-- [ ] refactor ci trigger
-- [ ] bot mr automatically merge
-- [ ] support other endpoints
-- [ ] add readme about env, cfg
+- [ ] add readme about env, cfg. for contributor
 - [ ] release
