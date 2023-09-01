@@ -8,9 +8,9 @@ import (
 	"log/slog"
 	"net/http"
 
-	basyxAas "hiroyoshii/go-aas-proxy/gen/go"
-	"hiroyoshii/go-aas-proxy/internal/aas"
-	"hiroyoshii/go-aas-proxy/internal/submodel"
+	basyxAas "github.com/hiroyoshii/go-aas-proxy/gen/go"
+	"github.com/hiroyoshii/go-aas-proxy/internal/aas"
+	"github.com/hiroyoshii/go-aas-proxy/internal/submodel"
 
 	"github.com/labstack/echo/v4"
 )

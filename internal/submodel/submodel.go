@@ -4,13 +4,14 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-	"hiroyoshii/go-aas-proxy/internal/sqlutility"
 	"log/slog"
 	"os"
 	"path/filepath"
 	"strings"
 	"sync"
 	"text/template"
+
+	"github.com/hiroyoshii/go-aas-proxy/internal/sqlutility"
 
 	"github.com/iancoleman/strcase"
 

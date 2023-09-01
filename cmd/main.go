@@ -3,12 +3,13 @@ package main
 import (
 	"context"
 	"fmt"
-	"hiroyoshii/go-aas-proxy/internal/server"
 	"log/slog"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"github.com/hiroyoshii/go-aas-proxy/internal/server"
 
 	"github.com/caarlos0/env"
 )
