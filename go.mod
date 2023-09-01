@@ -1,4 +1,4 @@
-module hiroyoshii/go-aas-proxy
+module github.com/hiroyoshii/go-aas-proxy
 
 go 1.21
 
