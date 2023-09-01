@@ -7,6 +7,7 @@
   [![Build](https://github.com/hiroyoshii/go-aas-proxy/actions/workflows/go_application.yaml/badge.svg)](https://github.com/hiroyoshii/go-aas-proxy/actions/workflows/go_application.yaml)
   [![CodeQL](https://github.com/hiroyoshii/go-aas-proxy/actions/workflows/codeql.yml/badge.svg)](https://github.com/hiroyoshii/go-aas-proxy/actions/workflows/codeql.yml)
   [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/hiroyoshii/go-aas-proxy/badge)](https://securityscorecards.dev/viewer/?uri=github.com/hiroyoshii/go-aas-proxy)
+  [![Go Report Card](https://goreportcard.com/badge/github.com/hiroyoshii/go-aas-proxy)](https://goreportcard.com/report/github.com/hiroyoshii/go-aas-proxy)
   ![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/hiroyoshii/go-aas-proxy)
   [![License](https://img.shields.io/github/license/hiroyoshii/go-aas-proxy)](LICENSE)
 
