@@ -18,4 +18,4 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-      - uses: hmarr/auto-approve-action@v3
+      - uses: hmarr/auto-approve-action@134e1011866211ab5b452c8ab06ea0447e888610 # v3
