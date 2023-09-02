@@ -4,6 +4,9 @@ on:
     branches: [ main ]
   workflow_dispatch:
     
+permissions:
+  contents: read
+
 jobs:
   k6-test:
     name: Run scenarigo and k6 test

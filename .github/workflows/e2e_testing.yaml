@@ -3,6 +3,9 @@ on:
   push:
   workflow_dispatch:
     
+permissions:
+  contents: read
+
 jobs:
   e2e-test:
     name: Run scenarigo and k6 test
