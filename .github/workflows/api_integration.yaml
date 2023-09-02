@@ -3,8 +3,13 @@ name: Basyx API Integration
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   test:
+    permissions:
+      contents: write  # for Git to git push
     name: Gen open API
     runs-on: ubuntu-latest
     steps:
