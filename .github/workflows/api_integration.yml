@@ -21,8 +21,8 @@ jobs:
       - name: retrieve api spec from swaggerhub
         run: |
           mkdir -p ./gen/source/
-          BASYX_SWAGGER=https://api.swaggerhub.com/apis/BaSyx/basyx_asset_administration_shell_repository_http_rest_api/v1/swagger.yaml?resolved=true
-          curl $BASYX_SWAGGER > ./gen/source/basyx-aas.yaml
+          BASYX_SWAGGER="https://api.swaggerhub.com/apis/BaSyx/basyx_asset_administration_shell_repository_http_rest_api/v1/swagger.yaml?resolved=true"
+          curl "$BASYX_SWAGGER" > ./gen/source/basyx-aas.yaml
       - name: generate go code
         run: |
           mkdir -p ./gen/go/
