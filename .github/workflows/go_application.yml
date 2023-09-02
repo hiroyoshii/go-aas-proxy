@@ -1,0 +1,40 @@
+name: build
+
+on: [pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    permissions:
+      contents: read  # for actions/checkout to fetch code
+      security-events: write  # for github/codeql-action/upload-sarif to upload SARIF results
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        id: setup-go
+        with:
+          go-version-file: "go.mod"
+      - name: Build
+        run: go build -v ./...
+      - name: Checkout And Build
+        run: docker compose up -d postgres
+      - name: Test
+        run: go test -v ./...
+      - name: Run Trivy vulnerability scanner in repo mode
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ''
+          scan-type: 'fs'
+          ignore-unfixed: true
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL'
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
