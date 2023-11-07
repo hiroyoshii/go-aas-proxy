@@ -94,7 +94,7 @@ require (
 	github.com/huandu/xstrings v1.3.3 // indirect
 	github.com/iancoleman/strcase v0.3.0
 	github.com/imdario/mergo v0.3.11 // indirect
-	github.com/labstack/echo/v4 v4.11.2
+	github.com/labstack/echo/v4 v4.11.3
 	github.com/lib/pq v1.10.9
 	github.com/mitchellh/copystructure v1.0.0 // indirect
 	github.com/mitchellh/reflectwalk v1.0.0 // indirect
