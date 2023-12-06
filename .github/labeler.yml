@@ -1,3 +1,6 @@
+release:
+ - base-branch: 'main'
+ 
 go:
 - changed-files:
   - any-glob-to-any-file: '*.go'
