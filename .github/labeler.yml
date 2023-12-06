@@ -4,26 +4,24 @@ release:
 go:
 - any:
   - changed-files:
-    - any-glob-to-any-file: '*.go'
+    - any-glob-to-any-file: ['*.go']
 
 workflow:
 - any:
   - changed-files:
-    - any-glob-to-any-file: '.github/**/**'
+    - any-glob-to-any-file: ['.github/**/**']
 
 test:
 - any:
   - changed-files:
-    - any-glob-to-any-file: 'e2e/**'
-    - any-glob-to-any-file: 'test/**'
+    - any-glob-to-any-file: ['e2e/**', 'test/**']
 
 pages:
 - any:
   - changed-files:
-    - any-glob-to-any-file: '_config.yaml'
+    - any-glob-to-any-file: ['_config.yaml']
 
 docs:
 - any:
   - changed-files:
-    - any-glob-to-any-file: 'assets/**'
-    - any-glob-to-any-file: '*.md'
+    - any-glob-to-any-file: ['assets/**', '*.md']
