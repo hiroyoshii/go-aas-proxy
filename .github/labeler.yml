@@ -2,23 +2,28 @@ release:
  - base-branch: 'main'
  
 go:
-- changed-files:
-  - any-glob-to-any-file: '*.go'
+- any:
+  - changed-files:
+    - any-glob-to-any-file: '*.go'
 
 workflow:
-- changed-files:
-  - any-glob-to-any-file: '.github/**/**'
+- any:
+  - changed-files:
+    - any-glob-to-any-file: '.github/**/**'
 
 test:
-- changed-files:
-  - any-glob-to-any-file: 'e2e/**'
-  - any-glob-to-any-file: 'test/**'
+- any:
+  - changed-files:
+    - any-glob-to-any-file: 'e2e/**'
+    - any-glob-to-any-file: 'test/**'
 
 pages:
-- changed-files:
-  - any-glob-to-any-file: '_config.yaml'
+- any:
+  - changed-files:
+    - any-glob-to-any-file: '_config.yaml'
 
 docs:
-- changed-files:
-  - any-glob-to-any-file: 'assets/**'
-  - any-glob-to-any-file: '*.md'
+- any:
+  - changed-files:
+    - any-glob-to-any-file: 'assets/**'
+    - any-glob-to-any-file: '*.md'
