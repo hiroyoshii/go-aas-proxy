@@ -1,16 +1,21 @@
 go:
-- '*.go'
+- changed-files:
+  - any-glob-to-any-file: '*.go'
 
 workflow:
-- '.github/**/**'
+- changed-files:
+  - any-glob-to-any-file: '.github/**/**'
 
 test:
-- 'e2e/**'
-- 'test/**'
+- changed-files:
+  - any-glob-to-any-file: 'e2e/**'
+  - any-glob-to-any-file: 'test/**'
 
 pages:
-- '_config.yaml'
+- changed-files:
+  - any-glob-to-any-file: '_config.yaml'
 
 docs:
-- '*.md'
-- 'assets/**'
+- changed-files:
+  - any-glob-to-any-file: 'assets/**'
+  - any-glob-to-any-file: '*.md'
