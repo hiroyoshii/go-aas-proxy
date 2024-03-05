@@ -32,7 +32,7 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag localbuild/testimage:latest
     - name: Scan the image and upload dependency results
-      uses: anchore/sbom-action@f3355df2ccd621f5873fe3c7c653ebdc5ef1bcb2
+      uses: anchore/sbom-action@9fece9e20048ca9590af301449208b2b8861333b
       with:
         image: "localbuild/testimage:latest"
         artifact-name: image.spdx.json
