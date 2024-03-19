@@ -100,7 +100,7 @@ require (
 	github.com/mitchellh/copystructure v1.0.0 // indirect
 	github.com/mitchellh/reflectwalk v1.0.0 // indirect
 	github.com/shopspring/decimal v1.2.0 // indirect
-	github.com/sijms/go-ora/v2 v2.8.9
+	github.com/sijms/go-ora/v2 v2.8.10
 	github.com/spf13/cast v1.3.1 // indirect
 	golang.org/x/crypto v0.17.0 // indirect
 )
