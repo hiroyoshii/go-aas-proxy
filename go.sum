@@ -278,6 +278,8 @@ github.com/sijms/go-ora/v2 v2.8.10 h1:Ekhx0I+A9qVBy1eOLa2eIhHWWYwVTa0MM78KS6h+5f
 github.com/sijms/go-ora/v2 v2.8.10/go.mod h1:EHxlY6x7y9HAsdfumurRfTd+v8NrEOTR3Xl4FWlH6xk=
 github.com/sijms/go-ora/v2 v2.8.11 h1:oQtSX145kCYSjnrmWdtqp2LON9wOQW09wPJ5pIEn5Tg=
 github.com/sijms/go-ora/v2 v2.8.11/go.mod h1:EHxlY6x7y9HAsdfumurRfTd+v8NrEOTR3Xl4FWlH6xk=
+github.com/sijms/go-ora/v2 v2.8.12 h1:iA48pIi7sAchBqOCRyB7zPgsiHTzWrrCGzM946wBvRU=
+github.com/sijms/go-ora/v2 v2.8.12/go.mod h1:EHxlY6x7y9HAsdfumurRfTd+v8NrEOTR3Xl4FWlH6xk=
 github.com/sirupsen/logrus v1.8.1 h1:dJKuHgqk1NNQlqoA6BTlM1Wf9DOH3NBjQyu0h9+AZZE=
 github.com/sirupsen/logrus v1.8.1/go.mod h1:yWOB1SBYBC5VeMP7gHvWumXLIWorT60ONWic61uBYv0=
 github.com/spf13/cast v1.3.1 h1:nFm6S0SMdyzrzcmThSipiEubIDy8WEXKNZ0UOgiRpng=
