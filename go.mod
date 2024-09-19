@@ -3,7 +3,7 @@ module github.com/hiroyoshii/go-aas-proxy
 go 1.21
 
 require (
-	github.com/Masterminds/sprig/v3 v3.2.3
+	github.com/Masterminds/sprig/v3 v3.3.0
 	github.com/deepmap/oapi-codegen v1.16.3
 	github.com/deepmap/oapi-codegen/v2 v2.2.0
 	github.com/getkin/kin-openapi v0.127.0
@@ -12,6 +12,7 @@ require (
 )
 
 require (
+	dario.cat/mergo v1.0.1 // indirect
 	filippo.io/edwards25519 v1.1.0 // indirect
 	github.com/BurntSushi/toml v1.3.2 // indirect
 	github.com/CloudyKit/fastprinter v0.0.0-20200109182630-33d98a066a53 // indirect
@@ -78,8 +79,8 @@ require (
 	github.com/yosssi/ace v0.0.5 // indirect
 	golang.org/x/arch v0.4.0 // indirect
 	golang.org/x/net v0.24.0 // indirect
-	golang.org/x/sys v0.19.0 // indirect
-	golang.org/x/text v0.15.0 // indirect
+	golang.org/x/sys v0.23.0 // indirect
+	golang.org/x/text v0.17.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
@@ -88,19 +89,19 @@ require (
 require (
 	github.com/DATA-DOG/go-sqlmock v1.5.2
 	github.com/Masterminds/goutils v1.1.1 // indirect
-	github.com/Masterminds/semver/v3 v3.2.0 // indirect
+	github.com/Masterminds/semver/v3 v3.3.0 // indirect
 	github.com/caarlos0/env v3.5.0+incompatible
 	github.com/go-sql-driver/mysql v1.8.1
-	github.com/google/uuid v1.3.1 // indirect
-	github.com/huandu/xstrings v1.3.3 // indirect
+	github.com/google/uuid v1.6.0 // indirect
+	github.com/huandu/xstrings v1.5.0 // indirect
 	github.com/iancoleman/strcase v0.3.0
 	github.com/imdario/mergo v0.3.11 // indirect
 	github.com/labstack/echo/v4 v4.12.0
 	github.com/lib/pq v1.10.9
-	github.com/mitchellh/copystructure v1.0.0 // indirect
-	github.com/mitchellh/reflectwalk v1.0.0 // indirect
-	github.com/shopspring/decimal v1.2.0 // indirect
+	github.com/mitchellh/copystructure v1.2.0 // indirect
+	github.com/mitchellh/reflectwalk v1.0.2 // indirect
+	github.com/shopspring/decimal v1.4.0 // indirect
 	github.com/sijms/go-ora/v2 v2.8.19
-	github.com/spf13/cast v1.3.1 // indirect
-	golang.org/x/crypto v0.22.0 // indirect
+	github.com/spf13/cast v1.7.0 // indirect
+	golang.org/x/crypto v0.26.0 // indirect
 )
