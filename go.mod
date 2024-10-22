@@ -5,7 +5,7 @@ go 1.21
 require (
 	github.com/Masterminds/sprig/v3 v3.2.3
 	github.com/deepmap/oapi-codegen v1.16.3
-	github.com/deepmap/oapi-codegen/v2 v2.2.0
+	github.com/deepmap/oapi-codegen/v2 v2.4.1
 	github.com/getkin/kin-openapi v0.127.0
 	github.com/stretchr/testify v1.9.0
 	gopkg.in/yaml.v3 v3.0.1
