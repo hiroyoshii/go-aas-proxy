@@ -3,10 +3,10 @@ module github.com/hiroyoshii/go-aas-proxy
 go 1.21
 
 require (
-	github.com/Masterminds/sprig/v3 v3.2.3
+	github.com/Masterminds/sprig/v3 v3.3.0
 	github.com/deepmap/oapi-codegen v1.16.3
-	github.com/deepmap/oapi-codegen/v2 v2.2.0
-	github.com/getkin/kin-openapi v0.127.0
+	github.com/deepmap/oapi-codegen/v2 v2.4.1
+	github.com/getkin/kin-openapi v0.128.0
 	github.com/stretchr/testify v1.9.0
 	gopkg.in/yaml.v3 v3.0.1
 )
@@ -100,7 +100,7 @@ require (
 	github.com/mitchellh/copystructure v1.0.0 // indirect
 	github.com/mitchellh/reflectwalk v1.0.0 // indirect
 	github.com/shopspring/decimal v1.2.0 // indirect
-	github.com/sijms/go-ora/v2 v2.8.19
+	github.com/sijms/go-ora/v2 v2.8.22
 	github.com/spf13/cast v1.3.1 // indirect
 	golang.org/x/crypto v0.22.0 // indirect
 )

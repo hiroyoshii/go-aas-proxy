@@ -13,7 +13,7 @@ jobs:
       security-events: write  # for github/codeql-action/upload-sarif to upload SARIF results
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # v4.2.1
       - name: Set up Go
         uses: actions/setup-go@0a12ed9d6a96ab950c8f026ed9f722fe0da7ef32 # v5.0.2
         id: setup-go
@@ -26,7 +26,7 @@ jobs:
       - name: Test
         run: go test -v ./...
       - name: Run Trivy vulnerability scanner in repo mode
-        uses: aquasecurity/trivy-action@d9cd5b1c23aaf8cb31bb09141028215828364bbb # master
+        uses: aquasecurity/trivy-action@cf990b19d84bbbe1eb8833659989a7c1029132e3 # master
         with:
           image-ref: ''
           scan-type: 'fs'
