@@ -84,7 +84,7 @@
   ```
 
   ### Example
-  * run with sample data (run docker-compose and create sample deta)
+  * run with sample data (run docker compose and create sample deta)
   ```
   ./e2e/scenario_setup.sh
   ```
