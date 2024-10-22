@@ -22,7 +22,7 @@ jobs:
           go install github.com/zoncoen/scenarigo/cmd/scenarigo@v0.14.2
           ./e2e/scenario_setup.sh
           curl http://localhost:8081/shells/smart.festo.com%2Fdemo%2Faas%2F1%2F1%2F454576463545648365874
-          docker compose -f e2e/docker compose.yaml logs
+          docker compose -f e2e/docker-compose.yaml logs
           scenarigo run -c e2e/scenario/scenariogo.yaml
       - name: Install k6
         run: |
