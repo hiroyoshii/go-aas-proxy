@@ -1,0 +1,7 @@
+[[IgnoredVulns]]
+id = "GHSA-m9xq-6h2j-65r2"
+reason = "No markdown is used in go lang application"
+
+[[IgnoredVulns]]
+id = "GHSA-xhr3-wf7j-h255"
+reason = "No markdown is used in go lang application"
