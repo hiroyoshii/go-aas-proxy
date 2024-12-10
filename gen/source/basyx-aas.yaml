@@ -811,6 +811,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Result'
+  /helloworld:
+    get:
+      tags:
+      - HelloWorld
+      summary: Returns a greeting message
+      operationId: GetHelloWorlod
+      responses:
+        "200":
+          description: Returns the greeting message
+          content:
+            text/plain:
+              schema:
+                type: string
 components:
   schemas:
     AssetAdministrationShell:
