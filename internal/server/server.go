@@ -300,6 +300,11 @@ func (s Server) ShellRepoPutSubmodelElementValueByIdShort(ctx echo.Context, aasI
 	return ctx.JSON(http.StatusNotImplemented, nil)
 }
 
+// New handler function to return "HelloWorlod"
+func (s Server) GetHelloWorlod(ctx echo.Context) error {
+	return ctx.String(http.StatusOK, "HelloWorlod")
+}
+
 func NewServer(ctx context.Context) (*echo.Echo, error) {
 	instance := echo.New()
 	aCli, err := aas.NewAas()
@@ -311,5 +316,9 @@ func NewServer(ctx context.Context) (*echo.Echo, error) {
 
 	// 自動生成されたハンドラ登録関数にServerInterfaceを満たすserverを渡す
 	basyxAas.RegisterHandlers(instance, server)
+
+	// Register the new handler function
+	instance.GET("/helloworld", server.GetHelloWorlod)
+
 	return instance, nil
 }

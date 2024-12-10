@@ -18,4 +18,11 @@ steps:
     url: "http://localhost:8081/shells/{{vars.aas_id}}"
   expect:
     code: 404
-
+- title: GET helloworld
+  protocol: http
+  request:
+    method: GET
+    url: "http://localhost:8081/helloworld"
+  expect:
+    code: 200
+    body: "HelloWorlod"
