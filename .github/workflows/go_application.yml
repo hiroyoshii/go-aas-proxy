@@ -26,7 +26,7 @@ jobs:
       - name: Test
         run: go test -v ./...
       - name: Run Trivy vulnerability scanner in repo mode
-        uses: aquasecurity/trivy-action@ea27ac12e15e065601133e2e439657937385d5a8 # master
+        uses: aquasecurity/trivy-action@77137e9dc3ab1b329b7c8a38c2eb7475850a14e8 # master
         with:
           image-ref: ''
           scan-type: 'fs'
