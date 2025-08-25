@@ -7,7 +7,7 @@ require (
 	github.com/Masterminds/sprig/v3 v3.3.0
 	github.com/caarlos0/env v3.5.0+incompatible
 	github.com/deepmap/oapi-codegen v1.16.3
-	github.com/getkin/kin-openapi v0.132.0
+	github.com/getkin/kin-openapi v0.133.0
 	github.com/go-sql-driver/mysql v1.9.1
 	github.com/iancoleman/strcase v0.3.0
 	github.com/labstack/echo/v4 v4.13.4
@@ -91,6 +91,7 @@ require (
 	github.com/valyala/fasttemplate v1.2.2 // indirect
 	github.com/vmihailenco/msgpack/v5 v5.3.5 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
+	github.com/woodsbury/decimal128 v1.3.0 // indirect
 	github.com/yosssi/ace v0.0.5 // indirect
 	golang.org/x/arch v0.3.0 // indirect
 	golang.org/x/crypto v0.38.0 // indirect
