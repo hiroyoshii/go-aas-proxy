@@ -11,7 +11,7 @@ require (
 	github.com/go-sql-driver/mysql v1.9.1
 	github.com/iancoleman/strcase v0.3.0
 	github.com/labstack/echo/v4 v4.13.4
-	github.com/lib/pq v1.10.9
+	github.com/lib/pq v1.12.3
 	github.com/sijms/go-ora/v2 v2.9.0
 	github.com/stretchr/testify v1.11.1
 	gopkg.in/yaml.v3 v3.0.1
