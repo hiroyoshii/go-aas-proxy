@@ -1,6 +1,6 @@
 module github.com/hiroyoshii/go-aas-proxy
 
-go 1.23.0
+go 1.24
 
 require (
 	github.com/DATA-DOG/go-sqlmock v1.5.2
@@ -59,7 +59,7 @@ require (
 	github.com/kataras/pio v0.0.12 // indirect
 	github.com/kataras/sitemap v0.0.6 // indirect
 	github.com/kataras/tunnel v0.0.4 // indirect
-	github.com/klauspost/compress v1.16.7 // indirect
+	github.com/klauspost/compress v1.18.7 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.4 // indirect
 	github.com/labstack/gommon v0.4.2 // indirect
 	github.com/leodido/go-urn v1.2.4 // indirect
